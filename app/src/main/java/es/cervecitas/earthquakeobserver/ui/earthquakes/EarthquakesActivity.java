@@ -19,13 +19,17 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.cervecitas.earthquakeobserver.R;
+import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
 
 public class EarthquakesActivity extends AppCompatActivity implements EarthquakesView {
 
+    @Inject
     EarthquakesPresenter presenter;
 
     @BindView(R.id.rvEarthquakes)
@@ -39,10 +43,12 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_earthquake);
 
+        ((EarthquakeObserverApplication)getApplication()).getAppComponent().inject(this);
+
         ButterKnife.bind(this);
 
         rvEarthquakes.setLayoutManager(new LinearLayoutManager(this));
-        presenter = new EarthquakesPresenterImpl();
+
         presenter.setView(this);
         presenter.getEarthquakes();
     }
