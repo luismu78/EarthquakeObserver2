@@ -1,5 +1,7 @@
 package es.cervecitas.earthquakeobserver.dagger;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,7 +14,7 @@ public class PresenterModule {
 
     @Provides
     @Singleton
-    EarthquakesPresenter provideEarthquakesPresenter() {
-        return new EarthquakesPresenterImpl();
+    EarthquakesPresenter provideEarthquakesPresenter(Context context) {
+        return new EarthquakesPresenterImpl(context);
     }
 }

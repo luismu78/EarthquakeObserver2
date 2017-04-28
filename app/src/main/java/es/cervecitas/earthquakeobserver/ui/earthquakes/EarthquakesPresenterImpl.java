@@ -1,24 +1,32 @@
 package es.cervecitas.earthquakeobserver.ui.earthquakes;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import es.cervecitas.earthquakeobserver.app.Constants;
+import javax.inject.Inject;
+
+import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
 import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
 import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.network.model.Feature;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
+    @Inject
+    EarthquakeEventAPI earthquakeEventAPI;
+
     private EarthquakesView view;
+
+    public EarthquakesPresenterImpl(Context context) {
+        ((EarthquakeObserverApplication) context).getAppComponent().inject(this);
+    }
 
     @Override
     public void setView(EarthquakesView view) {
@@ -28,15 +36,6 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     @Override
     public void getEarthquakes() {
         view.showLoading();
-
-        Converter.Factory converter = GsonConverterFactory.create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(converter)
-                .build();
-
-        EarthquakeEventAPI earthquakeEventAPI = retrofit.create(EarthquakeEventAPI.class);
 
         earthquakeEventAPI.getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
                 .enqueue(new Callback<EarthquakeObjects>() {
