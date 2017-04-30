@@ -63,7 +63,6 @@ public class NetworkModule {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         Request request = chain.request();
-                        //if (isNetworkAvailable(context)) {
                         if (isNetworkAvailable(context)) {
                             request = request.newBuilder().header("Cache-Control", "public, max-age=" + HTTP_RESPONSE_DISK_CACHE_MAX_AGE).build();
                         } else {
