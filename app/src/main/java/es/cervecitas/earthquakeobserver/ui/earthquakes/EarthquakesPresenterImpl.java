@@ -13,6 +13,11 @@ import es.cervecitas.earthquakeobserver.model.Earthquake;
 import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
 import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.network.model.Feature;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,7 +42,8 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     public void getEarthquakes() {
         view.showLoading();
 
-        earthquakeEventAPI.getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+        earthquakeEventAPI
+                .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
                 .enqueue(new Callback<EarthquakeObjects>() {
                     @Override
                     public void onResponse(Call<EarthquakeObjects> call, Response<EarthquakeObjects> response) {
@@ -71,6 +77,40 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                         view.hideLoading();
                     }
                 });
+//                .observeOn(Schedulers.io())
+//                .map(new Function<EarthquakeObjects, List<Earthquake>>() {
+//                    @Override
+//                    public List<Earthquake> apply(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
+//                        List<Earthquake> earthquakeList = new ArrayList<>();
+//
+//                        for (Feature feature : earthquakeObjects.getFeatures()) {
+//                            // magnitude
+//                            Double magnitude = feature.getProperties().getMag();
+//                            // location
+//                            String location = feature.getProperties().getPlace();
+//                            // date & time
+//                            Calendar calDate = Calendar.getInstance();
+//                            calDate.setTimeInMillis(feature.getProperties().getTime());
+//                            // url
+//                            String url = feature.getProperties().getUrl();
+//
+//                            earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
+//                        }
+//
+//
+//                        return earthquakeList;
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<List<Earthquake>>() {
+//                    @Override
+//                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
+//                        view.showEarthquakeList(earthquakes);
+//                        view.hideLoading();
+//                    }
+//                });
+                
+
     }
 
     private String getFormat() {
