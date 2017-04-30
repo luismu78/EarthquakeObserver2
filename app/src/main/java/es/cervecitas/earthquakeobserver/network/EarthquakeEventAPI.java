@@ -1,6 +1,7 @@
 package es.cervecitas.earthquakeobserver.network;
 
 import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -19,7 +20,7 @@ public interface EarthquakeEventAPI {
     String PARAM_STARTDATE = "starttime";
 
     @GET("query")
-    Call<EarthquakeObjects> getEarthquakeObjects(
+    Single<EarthquakeObjects> getEarthquakeObjects(
             @Query(PARAM_FORMAT) String format,
             @Query(PARAM_EVENT_TYPE) String eventtype,
             @Query(PARAM_ORDER_BY) String orderby,

@@ -44,73 +44,39 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
         earthquakeEventAPI
                 .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
-                .enqueue(new Callback<EarthquakeObjects>() {
+                .subscribeOn(Schedulers.io()) // Asynchronously subscribes subscribers to this Single on the specified scheduler
+                .observeOn(Schedulers.io()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
+                .map(new Function<EarthquakeObjects, List<Earthquake>>() { // // Function<Input, Output>()
                     @Override
-                    public void onResponse(Call<EarthquakeObjects> call, Response<EarthquakeObjects> response) {
-                        if (response.code() != 200) {
-                            view.showErrorMessage();
-                        } else {
-                            List<Earthquake> earthquakeList = new ArrayList<>();
+                    public List<Earthquake> apply(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
+                        List<Earthquake> earthquakeList = new ArrayList<>();
 
-                            for (Feature feature : response.body().getFeatures()) {
-                                // magnitude
-                                Double magnitude = feature.getProperties().getMag();
-                                // location
-                                String location = feature.getProperties().getPlace();
-                                // date & time
-                                Calendar calDate = Calendar.getInstance();
-                                calDate.setTimeInMillis(feature.getProperties().getTime());
-                                // url
-                                String url = feature.getProperties().getUrl();
+                        for (Feature feature : earthquakeObjects.getFeatures()) {
+                            // magnitude
+                            Double magnitude = feature.getProperties().getMag();
+                            // location
+                            String location = feature.getProperties().getPlace();
+                            // date & time
+                            Calendar calDate = Calendar.getInstance();
+                            calDate.setTimeInMillis(feature.getProperties().getTime());
+                            // url
+                            String url = feature.getProperties().getUrl();
 
-                                earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
-                            }
-
-                            view.showEarthquakeList(earthquakeList);
+                            earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
                         }
-                        view.hideLoading();
-                    }
 
+
+                        return earthquakeList;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
+                .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
                     @Override
-                    public void onFailure(Call<EarthquakeObjects> call, Throwable t) {
-                        view.showErrorMessage();
+                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
+                        view.showEarthquakeList(earthquakes);
                         view.hideLoading();
                     }
                 });
-//                .observeOn(Schedulers.io())
-//                .map(new Function<EarthquakeObjects, List<Earthquake>>() {
-//                    @Override
-//                    public List<Earthquake> apply(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
-//                        List<Earthquake> earthquakeList = new ArrayList<>();
-//
-//                        for (Feature feature : earthquakeObjects.getFeatures()) {
-//                            // magnitude
-//                            Double magnitude = feature.getProperties().getMag();
-//                            // location
-//                            String location = feature.getProperties().getPlace();
-//                            // date & time
-//                            Calendar calDate = Calendar.getInstance();
-//                            calDate.setTimeInMillis(feature.getProperties().getTime());
-//                            // url
-//                            String url = feature.getProperties().getUrl();
-//
-//                            earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
-//                        }
-//
-//
-//                        return earthquakeList;
-//                    }
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<List<Earthquake>>() {
-//                    @Override
-//                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
-//                        view.showEarthquakeList(earthquakes);
-//                        view.hideLoading();
-//                    }
-//                });
-                
-
     }
 
     private String getFormat() {
