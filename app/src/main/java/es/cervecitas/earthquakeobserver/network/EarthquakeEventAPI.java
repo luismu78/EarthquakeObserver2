@@ -2,13 +2,8 @@ package es.cervecitas.earthquakeobserver.network;
 
 import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
 import io.reactivex.Single;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-
-/**
- * Created by luism on 28/04/2017.
- */
 
 public interface EarthquakeEventAPI {
     //@GET("query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10")
