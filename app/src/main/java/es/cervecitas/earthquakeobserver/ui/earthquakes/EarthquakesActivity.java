@@ -8,6 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import butterknife.ButterKnife;
 import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
+import es.cervecitas.earthquakeobserver.ui.preferences.EarthquakesPreferencesActivity;
 
 public class EarthquakesActivity extends AppCompatActivity implements EarthquakesView {
 
@@ -84,4 +87,22 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         startActivity(showEarthquakeIntent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.earthquake_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, EarthquakesPreferencesActivity.class);
+                startActivity(settingsIntent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
