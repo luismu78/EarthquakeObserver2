@@ -46,7 +46,6 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         rvEarthquakes.setLayoutManager(new LinearLayoutManager(this));
 
         presenter.setView(this);
-        presenter.getEarthquakes();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -54,6 +53,13 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
                 presenter.getEarthquakes();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        presenter.getEarthquakes();
     }
 
     // EarthquakesView
