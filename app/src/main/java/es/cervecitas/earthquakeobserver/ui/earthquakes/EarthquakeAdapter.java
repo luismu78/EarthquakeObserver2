@@ -1,10 +1,13 @@
 package es.cervecitas.earthquakeobserver.ui.earthquakes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.text.DecimalFormat;
@@ -34,7 +37,7 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolde
     }
 
     @Override
-    public void onBindViewHolder(EarthquakesViewHolder holder, int position) {
+    public void onBindViewHolder(EarthquakesViewHolder holder, final int position) {
         Earthquake earthquake = earthquakeList.get(position);
 
         // Magnitude & color
@@ -65,6 +68,16 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolde
         // Time
         sdf = new SimpleDateFormat("h:mm a", java.util.Locale.getDefault());
         holder.getTvTime().setText(sdf.format(earthquake.getCalendar().getTime()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Earthquake selectedEarthquake = earthquakeList.get(position);
+                Uri earthquakeUri = Uri.parse(selectedEarthquake.getUrl());
+                Intent showEarthquakeIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                context.startActivity(showEarthquakeIntent);
+            }
+        });
     }
 
     @Override
