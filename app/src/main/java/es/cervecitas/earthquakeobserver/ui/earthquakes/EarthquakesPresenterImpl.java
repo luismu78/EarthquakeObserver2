@@ -1,6 +1,7 @@
 package es.cervecitas.earthquakeobserver.ui.earthquakes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
 import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
@@ -23,6 +25,12 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
     @Inject
     EarthquakeEventAPI earthquakeEventAPI;
+
+    @Inject
+    Context context;
+
+    @Inject
+    SharedPreferences preferences;
 
     private EarthquakesView view;
 
@@ -62,7 +70,6 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                             earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
                         }
 
-
                         return earthquakeList;
                     }
                 })
@@ -77,27 +84,44 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     }
 
     private String getFormat() {
-        return "geojson";
+        return "geojson"; //TODO: fix magic string
     }
 
     private String getEventType() {
-        return "earthquake";
+        return "earthquake"; //TODO: fix magic string
     }
 
     private int getLimit() {
-        return 20;
+        int n = Integer.parseInt(
+                preferences.getString(
+                        context.getString(R.string.settings_earthquake_limit_key),
+                        context.getString(R.string.settings_earthquake_limit_default)
+                ));
+        return n;
     }
 
     private long getMinMag() {
-        return 6;
+        return Long.parseLong(
+                preferences.getString(
+                        context.getString(R.string.settings_min_magnitude_key),
+                        context.getString(R.string.settings_min_magnitude_default)
+                ));
     }
 
     private String getOrderBy() {
-        return "time";
+        return preferences.getString(
+                context.getString(R.string.settings_order_by_key),
+                context.getString(R.string.settings_order_by_default)
+        );
     }
 
     private String getStartDate() {
-        int timePeriod = 2;
+        int timePeriod = Integer.parseInt(
+                preferences.getString(
+                        context.getString(R.string.settings_filter_time_period_key),
+                        context.getString(R.string.settings_filter_time_period_default)
+                ));
+
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -timePeriod + 1);
         return calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH)) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
