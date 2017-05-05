@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,7 +44,9 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
 
         ButterKnife.bind(this);
 
+        rvEarthquakes.setAdapter(new EarthquakeAdapter(this, new ArrayList<Earthquake>()));
         rvEarthquakes.setLayoutManager(new LinearLayoutManager(this));
+        rvEarthquakes.setHasFixedSize(true);
 
         presenter.setView(this);
 
