@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -14,6 +15,7 @@ import dagger.Provides;
 import es.cervecitas.earthquakeobserver.app.Constants;
 import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
 import okhttp3.Cache;
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,11 +26,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class NetworkModule {
+class NetworkModule {
 
     private static final String NAME_BASE_URL = "NAME_BASE_URL";
-    private static final int HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 256 * 1024;
-    private static final long HTTP_RESPONSE_DISK_CACHE_MAX_AGE = 60 * 60;
+        private static final int HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 256 * 1024; // 256k
+    private static final int HTTP_RESPONSE_DISK_CACHE_MAX_AGE = 5 * 60; // 5 min
 
     @Provides
     @Named(NAME_BASE_URL)
@@ -56,19 +58,28 @@ public class NetworkModule {
     @Provides
     @Singleton
     OkHttpClient provideHttpClient(final Context context) {
-        return new OkHttpClient
-                .Builder()
+        return new OkHttpClient.Builder()
                 .cache(new Cache(context.getCacheDir(), HTTP_RESPONSE_DISK_CACHE_MAX_SIZE))
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request();
+
                         if (isNetworkAvailable(context)) {
-                            request = request.newBuilder().header("Cache-Control", "public, max-age=" + HTTP_RESPONSE_DISK_CACHE_MAX_AGE).build();
+                            Response response = chain.proceed(chain.request());
+                            CacheControl cacheControl = new CacheControl.Builder()
+                                    .maxAge(HTTP_RESPONSE_DISK_CACHE_MAX_AGE, TimeUnit.SECONDS)
+                                    .build();
+                            return response.newBuilder()
+                                    .header("Cache-Control", cacheControl.toString())
+                                    .build();
                         } else {
-                            request = request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build();
+                            Request request = chain.request();
+                            request = request.newBuilder()
+                                    .header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7)
+                                    .build();
+                            return chain.proceed(request);
                         }
-                        return chain.proceed(request);
+
                     }
                 })
                 .build();
