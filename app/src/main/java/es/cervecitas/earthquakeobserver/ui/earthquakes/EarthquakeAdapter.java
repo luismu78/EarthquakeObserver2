@@ -17,7 +17,7 @@ import java.util.List;
 import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
 
-public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolder> {
+class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolder> {
 
     private String LOCATION_SEPARATOR;
     private List<Earthquake> earthquakeList;
@@ -37,7 +37,7 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolde
     }
 
     @Override
-    public void onBindViewHolder(EarthquakesViewHolder holder, final int position) {
+    public void onBindViewHolder(final EarthquakesViewHolder holder, int position) {
         Earthquake earthquake = earthquakeList.get(position);
 
         // Magnitude & color
@@ -72,7 +72,7 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolde
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Earthquake selectedEarthquake = earthquakeList.get(position);
+                Earthquake selectedEarthquake = earthquakeList.get(holder.getAdapterPosition());
                 Uri earthquakeUri = Uri.parse(selectedEarthquake.getUrl());
                 Intent showEarthquakeIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
                 context.startActivity(showEarthquakeIntent);
