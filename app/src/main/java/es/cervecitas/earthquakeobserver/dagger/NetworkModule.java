@@ -26,10 +26,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-class NetworkModule {
+public class NetworkModule {
 
     private static final String NAME_BASE_URL = "NAME_BASE_URL";
-        private static final int HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 256 * 1024; // 256k
+    private static final int HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 256 * 1024; // 256k
     private static final int HTTP_RESPONSE_DISK_CACHE_MAX_AGE = 5 * 60; // 5 min
 
     @Provides
