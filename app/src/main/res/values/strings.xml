@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Title for the application. [CHAR LIMIT=12] -->
     <string name="app_name">Earthquake Observer</string>
 
@@ -8,6 +8,11 @@
     <!-- Default text to show with the earthquake location ("Near the Pacific-Antarctic Ridge")
          if no specific kilometer distance from the primary location is given [CHAR LIMIT=30] -->
     <string name="near_the">Near the</string>
+
+    <!-- Strings For Preference Headers -->
+    <string name="settings_category_limits">Limits</string>
+    <string name="settings_category_order">Order</string>
+    <string name="settings_category_magnitude">Magnitude</string>
 
     <!-- Strings For Enable Date Filter Preference [CHAR LIMIT=30] -->
     <string name="settings_enable_date_filter_label">Enable Date Filters</string>

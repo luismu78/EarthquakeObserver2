@@ -3,7 +3,7 @@
     android:title="@string/settings_title">
 
     <PreferenceCategory
-        android:title="Limits">
+        android:title="@string/settings_category_limits">
 
         <EditTextPreference
             android:defaultValue="@string/settings_earthquake_limit_default"
@@ -21,7 +21,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Order">
+        android:title="@string/settings_category_order">
 
         <ListPreference
             android:key="@string/settings_order_by_key"
@@ -33,7 +33,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Magnitude">
+        android:title="@string/settings_category_magnitude">
 
         <EditTextPreference
             android:defaultValue="@string/settings_min_magnitude_default"
