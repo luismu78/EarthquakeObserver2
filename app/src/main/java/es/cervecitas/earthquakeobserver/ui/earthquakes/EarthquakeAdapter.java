@@ -19,7 +19,7 @@ import es.cervecitas.earthquakeobserver.model.Earthquake;
 
 class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolder> {
 
-    private String LOCATION_SEPARATOR;
+    private static  final String LOCATION_SEPARATOR = " of ";
     private List<Earthquake> earthquakeList;
     private DecimalFormat decimalFormat = new DecimalFormat("0.0");
     private Context context;
@@ -27,7 +27,8 @@ class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolder> {
     EarthquakeAdapter(Context context, List<Earthquake> earthquakeList) {
         this.earthquakeList = earthquakeList;
         this.context = context;
-        LOCATION_SEPARATOR = context.getString(R.string.of_separator);
+
+//        LOCATION_SEPARATOR = context.getString(R.string.of_separator);
     }
 
     @Override
@@ -52,7 +53,7 @@ class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakesViewHolder> {
         String primaryLocation;
         if (originalLocation.contains(LOCATION_SEPARATOR)) {
             String[] parts = originalLocation.split(LOCATION_SEPARATOR);
-            locationOffset = parts[0] + LOCATION_SEPARATOR;
+            locationOffset = parts[0] + context.getString(R.string.of_separator);
             primaryLocation = parts[1];
         } else {
             locationOffset = context.getString(R.string.near_the);
