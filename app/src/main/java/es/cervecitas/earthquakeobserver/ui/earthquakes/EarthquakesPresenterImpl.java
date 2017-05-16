@@ -2,6 +2,7 @@ package es.cervecitas.earthquakeobserver.ui.earthquakes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +50,14 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
         earthquakeEventAPI
                 .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+                .onErrorReturn(new Function<Throwable, EarthquakeObjects>() {
+                    @Override
+                    public EarthquakeObjects apply(@NonNull Throwable throwable) throws Exception {
+                        view.showEarthquakeList(new ArrayList<Earthquake>());
+                        view.hideLoading();
+                        return new EarthquakeObjects();
+                    }
+                })
                 .subscribeOn(Schedulers.io()) // Asynchronously subscribes subscribers to this Single on the specified scheduler
                 .observeOn(Schedulers.io()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
                 .map(new Function<EarthquakeObjects, List<Earthquake>>() { // // Function<Input, Output>()
