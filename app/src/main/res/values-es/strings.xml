@@ -64,4 +64,6 @@
     <string name="action_settings">Configuración</string>
     <string name="no_internet_connection">No hay conexión a internet</string>
     <string name="no_earthquakes">No hay terremotos</string>
+    <string name="no_data_found">Sin Datos</string>
+    <string name="try_later">Intente Más Tarde</string>
 </resources>

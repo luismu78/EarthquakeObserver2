@@ -93,6 +93,7 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         if (earthquakeItemList.size() == 0) {
             showErrorMessage();
         } else {
+            hideErrorMessage();
             rvEarthquakes.setAdapter(new EarthquakeAdapter(this, earthquakeItemList));
             rvEarthquakes.getAdapter().notifyDataSetChanged();
         }
