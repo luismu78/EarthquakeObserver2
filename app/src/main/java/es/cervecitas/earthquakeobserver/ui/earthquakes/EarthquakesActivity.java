@@ -10,7 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,15 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
 
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.imgNoEarthquakes)
+    ImageView imgNoEarthqueakes;
+
+    @BindView(R.id.empty_view)
+    TextView emptyView;
+
+    @BindView(R.id.sub_empty_view)
+    TextView subEmptyView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,14 +90,28 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
 
     @Override
     public void showEarthquakeList(List<Earthquake> earthquakeItemList) {
-        rvEarthquakes.setAdapter(new EarthquakeAdapter(this, earthquakeItemList));
-        rvEarthquakes.getAdapter().notifyDataSetChanged();
+        if (earthquakeItemList.size() == 0) {
+            showErrorMessage();
+        } else {
+            rvEarthquakes.setAdapter(new EarthquakeAdapter(this, earthquakeItemList));
+            rvEarthquakes.getAdapter().notifyDataSetChanged();
+        }
     }
 
     @Override
     public void showErrorMessage() {
-        //TODO: move to Log
-        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        imgNoEarthqueakes.setVisibility(View.VISIBLE);
+        emptyView.setText(R.string.no_data_found);
+        emptyView.setVisibility(View.VISIBLE);
+        subEmptyView.setText(R.string.try_later);
+        subEmptyView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideErrorMessage() {
+        imgNoEarthqueakes.setVisibility(View.GONE);
+        emptyView.setVisibility(View.GONE);
+        subEmptyView.setVisibility(View.GONE);
     }
 
     @Override
