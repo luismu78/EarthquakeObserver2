@@ -31,11 +31,11 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     //Butterknife
-    compile 'com.jakewharton:butterknife:8.5.1'
-    apt "com.jakewharton:butterknife-compiler:8.5.1"
+    compile 'com.jakewharton:butterknife:8.6.0'
+    apt "com.jakewharton:butterknife-compiler:8.6.0"
     //Dagger
-    apt "com.google.dagger:dagger-compiler:2.10"
-    compile 'com.google.dagger:dagger:2.10'
+    apt "com.google.dagger:dagger-compiler:2.11"
+    compile 'com.google.dagger:dagger:2.11'
     provided 'javax.annotation:jsr250-api:1.0'
     //RxJava
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
