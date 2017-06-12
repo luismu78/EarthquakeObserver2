@@ -43,8 +43,15 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
         this.view = view;
     }
 
+
+
     @Override
     public void getEarthquakes() {
+        // TODO load earthquakes;
+    }
+
+    @Override
+    public void getEarthquakesFromRemote() {
         view.showLoading();
 
         earthquakeEventAPI

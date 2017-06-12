@@ -64,7 +64,7 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.getEarthquakes();
+                presenter.getEarthquakesFromRemote();
             }
         });
     }
@@ -73,7 +73,7 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
     protected void onResume() {
         super.onResume();
 
-        presenter.getEarthquakes();
+        presenter.getEarthquakesFromRemote();
     }
 
     // EarthquakesView

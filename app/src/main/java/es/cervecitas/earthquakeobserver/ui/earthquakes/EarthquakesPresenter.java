@@ -5,4 +5,6 @@ public interface EarthquakesPresenter {
     void setView(EarthquakesView view);
 
     void getEarthquakes();
+
+    void getEarthquakesFromRemote();
 }
