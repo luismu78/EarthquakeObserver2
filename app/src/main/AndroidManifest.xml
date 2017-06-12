@@ -24,6 +24,13 @@
         <activity
             android:name=".ui.preferences.EarthquakesPreferencesActivity"
             android:label="@string/Settings"/>
+
+        <provider
+            android:authorities=".provider.EarthquakeProvider"
+            android:name=".provider.EarthquakeProvider"
+            android:exported="false"
+            android:syncable="true" />
+
     </application>
 
 </manifest>
