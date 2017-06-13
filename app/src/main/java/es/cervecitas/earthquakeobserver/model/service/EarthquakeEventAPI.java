@@ -1,6 +1,6 @@
-package es.cervecitas.earthquakeobserver.network;
+package es.cervecitas.earthquakeobserver.model.service;
 
-import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.model.service.model.EarthquakeObjects;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

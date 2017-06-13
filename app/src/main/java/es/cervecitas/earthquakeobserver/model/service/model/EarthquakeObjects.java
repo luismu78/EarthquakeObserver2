@@ -1,5 +1,5 @@
 
-package es.cervecitas.earthquakeobserver.network.model;
+package es.cervecitas.earthquakeobserver.model.service.model;
 
 import java.util.ArrayList;
 import java.util.List;

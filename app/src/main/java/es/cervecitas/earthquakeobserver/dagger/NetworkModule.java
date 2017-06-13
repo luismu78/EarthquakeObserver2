@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import es.cervecitas.earthquakeobserver.app.Constants;
-import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
+import es.cervecitas.earthquakeobserver.model.service.EarthquakeEventAPI;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
