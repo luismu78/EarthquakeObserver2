@@ -8,32 +8,32 @@ import io.reactivex.Observable;
 
 abstract class BaseRepository {
 
-    private LruCache<Earthquake, Observable<?>> apiObservables = createLruCache();
+    private LruCache<Long, Observable<?>> apiObservables = createLruCache();
 
     @NonNull
-    private LruCache<Earthquake, Observable<?>> createLruCache() {
+    private LruCache<Long, Observable<?>> createLruCache() {
         return new LruCache<>(50);
     }
 
-    <T> Observable<T> cacheObservable(Earthquake earthquake, Observable<T> observable) {
+    <T> Observable<T> cacheObservable(Long timestamp, Observable<T> observable) {
 
-        Observable<T> cachedObservable = (Observable<T>) apiObservables.get(earthquake);
+        Observable<T> cachedObservable = (Observable<T>) apiObservables.get(timestamp);
         if (cachedObservable != null) {
             return cachedObservable;
         }
 
         cachedObservable = observable;
-        updateCache(earthquake, cachedObservable);
+        updateCache(timestamp, cachedObservable);
 
         return cachedObservable;
     }
 
-    private <T> void updateCache(Earthquake earthquake, Observable<T> observable) {
-        apiObservables.put(earthquake, observable);
+    private <T> void updateCache(Long timestamp, Observable<T> observable) {
+        apiObservables.put(timestamp, observable);
     }
 
-    public <T> void removeCache(Earthquake earthquake) {
-        apiObservables.remove(earthquake);
+    public <T> void removeCache(Long timestamp) {
+        apiObservables.remove(timestamp);
     }
 
     public void clearCache() {
