@@ -1,6 +1,6 @@
 package es.cervecitas.earthquakeobserver.model.service.repository;
 
-import es.cervecitas.earthquakeobserver.model.Earthquake;
+import es.cervecitas.earthquakeobserver.model.service.EarthquakeService;
 
 public class EarthquakeRepository extends BaseRepository {
 
