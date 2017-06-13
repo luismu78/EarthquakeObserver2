@@ -3,37 +3,36 @@ package es.cervecitas.earthquakeobserver.model.service.repository;
 import android.support.annotation.NonNull;
 import android.support.v4.util.LruCache;
 
-import es.cervecitas.earthquakeobserver.model.Earthquake;
 import io.reactivex.Observable;
 
 abstract class BaseRepository {
 
-    private LruCache<Long, Observable<?>> apiObservables = createLruCache();
+    private LruCache<String, Observable<?>> apiObservables = createLruCache();
 
     @NonNull
-    private LruCache<Long, Observable<?>> createLruCache() {
-        return new LruCache<>(50);
+    private LruCache<String, Observable<?>> createLruCache() {
+        return new LruCache<>(10);
     }
 
-    <T> Observable<T> cacheObservable(Long timestamp, Observable<T> observable) {
+    <T> Observable<T> cacheObservable(String startDateLimitMinMag, Observable<T> observable) {
 
-        Observable<T> cachedObservable = (Observable<T>) apiObservables.get(timestamp);
+        Observable<T> cachedObservable = (Observable<T>) apiObservables.get(startDateLimitMinMag);
         if (cachedObservable != null) {
             return cachedObservable;
         }
 
         cachedObservable = observable;
-        updateCache(timestamp, cachedObservable);
+        updateCache(startDateLimitMinMag, cachedObservable);
 
         return cachedObservable;
     }
 
-    private <T> void updateCache(Long timestamp, Observable<T> observable) {
-        apiObservables.put(timestamp, observable);
+    private <T> void updateCache(String startDateLimitMinMag, Observable<T> observable) {
+        apiObservables.put(startDateLimitMinMag, observable);
     }
 
-    public <T> void removeCache(Long timestamp) {
-        apiObservables.remove(timestamp);
+    public <T> void removeCache(String startDateLimitMinMag) {
+        apiObservables.remove(startDateLimitMinMag);
     }
 
     public void clearCache() {
