@@ -50,9 +50,16 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     public void getEarthquakes() {
         view.showLoading();
 
-        repository.getEarthquakeData(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+        repository
+                .getEarthquakeData(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
+                .onErrorReturn(new Function<Throwable, List<Earthquake>>() {
+                    @Override
+                    public List<Earthquake> apply(@NonNull Throwable throwable) throws Exception {
+                        return new ArrayList<Earthquake>();
+                    }
+                })
                 .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
                     @Override
                     public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
