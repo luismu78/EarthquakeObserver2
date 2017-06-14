@@ -31,10 +31,12 @@ abstract class BaseRepository {
         apiObservables.put(startDateLimitMinMag, observable);
     }
 
+    //TODO: find usage
     public <T> void removeCache(String startDateLimitMinMag) {
         apiObservables.remove(startDateLimitMinMag);
     }
 
+    //TODO: find usage
     public void clearCache() {
         apiObservables = createLruCache();
     }

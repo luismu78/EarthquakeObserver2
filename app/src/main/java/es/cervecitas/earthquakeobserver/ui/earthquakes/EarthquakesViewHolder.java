@@ -7,10 +7,6 @@ import android.widget.TextView;
 
 import es.cervecitas.earthquakeobserver.R;
 
-/**
- * Created by luism on 28/04/2017.
- */
-
 public class EarthquakesViewHolder extends RecyclerView.ViewHolder {
 
     private ViewGroup container;
