@@ -11,7 +11,6 @@ import es.cervecitas.earthquakeobserver.ui.earthquakes.EarthquakesPresenterImpl;
         modules = {
                 AppModule.class,
                 PresenterModule.class,
-                NetworkModule.class,
                 RepositoryModule.class
         }) // used to connect objects to their dependencies, typically by use of overridden inject() methods
 public interface AppComponent {
