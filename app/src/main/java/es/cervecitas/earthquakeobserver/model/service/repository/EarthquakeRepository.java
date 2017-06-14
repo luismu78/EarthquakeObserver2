@@ -28,26 +28,11 @@ public class EarthquakeRepository extends BaseRepository {
     public Observable<List<Earthquake>> getEarthquakeData(
             String format, String eventtype, String orderby, long minmag, final int limit, String startdate) {
 
-//        Observable<List<Earthquake>> earthquakeInfoObservable =
-//                Observable.combineLatest(
-//                        getLocalEarthquakeData(format, eventtype, orderby, minmag, limit, startdate),
-//                        getRemoteEarthquakeData(format, eventtype, orderby, minmag, limit, startdate),
-//                        new BiFunction<List<Earthquake>, List<Earthquake>, List<Earthquake>>() {
-//                            // TODO: this is wrong. fix it.
-//                            @Override
-//                            public List<Earthquake> apply(@NonNull List<Earthquake> earthquakes, @NonNull List<Earthquake> earthquakes2) throws Exception {
-//                                Log.d("HOLA", "earthquakes.size(): " + earthquakes.size());
-//                                if (earthquakes.size() > 0) {
-//                                    return earthquakes;
-//                                } else if (earthquakes2.size() > 0) {
-//                                    return earthquakes2;
-//                                } else return new ArrayList<Earthquake>();
-//                            }
-//                        }
-//                );
-//        return cacheObservable(CACHE_PREFIX_GET_EARTHQUAKES + startdate + limit + minmag, earthquakeInfoObservable);
+        Observable<List<Earthquake>> remoteData = getRemoteEarthquakeData(format, eventtype, orderby, minmag, limit, startdate);
 
-        return getRemoteEarthquakeData(format, eventtype, orderby, minmag, limit, startdate);
+        return cacheObservable(
+                CACHE_PREFIX_GET_EARTHQUAKES + format + eventtype + orderby + minmag + limit + startdate,
+                remoteData);
     }
 
     private Observable<List<Earthquake>> getRemoteEarthquakeData(
