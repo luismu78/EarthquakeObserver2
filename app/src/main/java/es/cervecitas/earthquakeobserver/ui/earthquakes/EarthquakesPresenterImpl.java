@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
-import es.cervecitas.earthquakeobserver.model.service.EarthquakeEventAPI;
 import es.cervecitas.earthquakeobserver.model.service.model.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.model.service.model.Feature;
 import es.cervecitas.earthquakeobserver.model.service.repository.EarthquakeRepository;
@@ -27,8 +26,8 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     @Inject
     EarthquakeRepository repository;
 
-    @Inject
-    EarthquakeEventAPI earthquakeEventAPI;
+//    @Inject
+//    EarthquakeEventAPI earthquakeEventAPI;
 
     @Inject
     Context context;
@@ -51,38 +50,8 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     public void getEarthquakes() {
         view.showLoading();
 
-        earthquakeEventAPI
-                .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
-                .subscribeOn(Schedulers.io()) // Asynchronously subscribes subscribers to this Single on the specified scheduler
-                .observeOn(Schedulers.io()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
-                .onErrorReturn(new Function<Throwable, EarthquakeObjects>() {
-                    @Override
-                    public EarthquakeObjects apply(@NonNull Throwable throwable) throws Exception {
-                        return new EarthquakeObjects();
-                    }
-                })
-                .map(new Function<EarthquakeObjects, List<Earthquake>>() { // // Function<Input, Output>()
-                    @Override
-                    public List<Earthquake> apply(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
-                        List<Earthquake> earthquakeList = new ArrayList<>();
-
-                        for (Feature feature : earthquakeObjects.getFeatures()) {
-                            // magnitude
-                            Double magnitude = feature.getProperties().getMag();
-                            // location
-                            String location = feature.getProperties().getPlace();
-                            // date & time
-                            Calendar calDate = Calendar.getInstance();
-                            calDate.setTimeInMillis(feature.getProperties().getTime());
-                            // url
-                            String url = feature.getProperties().getUrl();
-
-                            earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
-                        }
-
-                        return earthquakeList;
-                    }
-                })
+        repository.getEarthquakeData(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
                 .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
                     @Override
@@ -91,6 +60,48 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                         view.hideLoading();
                     }
                 });
+
+
+//        earthquakeEventAPI
+//                .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+//                .subscribeOn(Schedulers.io()) // Asynchronously subscribes subscribers to this Single on the specified scheduler
+//                .observeOn(Schedulers.io()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
+//                .onErrorReturn(new Function<Throwable, EarthquakeObjects>() {
+//                    @Override
+//                    public EarthquakeObjects apply(@NonNull Throwable throwable) throws Exception {
+//                        return new EarthquakeObjects();
+//                    }
+//                })
+//                .map(new Function<EarthquakeObjects, List<Earthquake>>() { // // Function<Input, Output>()
+//                    @Override
+//                    public List<Earthquake> apply(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
+//                        List<Earthquake> earthquakeList = new ArrayList<>();
+//
+//                        for (Feature feature : earthquakeObjects.getFeatures()) {
+//                            // magnitude
+//                            Double magnitude = feature.getProperties().getMag();
+//                            // location
+//                            String location = feature.getProperties().getPlace();
+//                            // date & time
+//                            Calendar calDate = Calendar.getInstance();
+//                            calDate.setTimeInMillis(feature.getProperties().getTime());
+//                            // url
+//                            String url = feature.getProperties().getUrl();
+//
+//                            earthquakeList.add(new Earthquake(magnitude, location, calDate.getTime().getTime(), url));
+//                        }
+//
+//                        return earthquakeList;
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
+//                .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
+//                    @Override
+//                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
+//                        view.showEarthquakeList(earthquakes);
+//                        view.hideLoading();
+//                    }
+//                });
     }
 
     private String getFormat() {
