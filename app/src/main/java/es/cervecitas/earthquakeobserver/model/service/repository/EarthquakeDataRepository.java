@@ -1,13 +1,13 @@
-package es.cervecitas.earthquakeobserver.service.repository;
+package es.cervecitas.earthquakeobserver.model.service.repository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import es.cervecitas.earthquakeobserver.model.Earthquake;
-import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
-import es.cervecitas.earthquakeobserver.network.model.Feature;
-import es.cervecitas.earthquakeobserver.service.EarthquakeService;
+import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.model.network.Feature;
+import es.cervecitas.earthquakeobserver.model.service.EarthquakeService;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;

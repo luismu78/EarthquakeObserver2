@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.service;
+package es.cervecitas.earthquakeobserver.model.service;
 
 public class ServiceConfig {
 

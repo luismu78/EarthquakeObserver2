@@ -4,10 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import es.cervecitas.earthquakeobserver.service.EarthquakeService;
-import es.cervecitas.earthquakeobserver.service.ServiceConfig;
-import es.cervecitas.earthquakeobserver.service.repository.BaseRepository;
-import es.cervecitas.earthquakeobserver.service.repository.EarthquakeDataRepository;
+import es.cervecitas.earthquakeobserver.model.service.EarthquakeService;
+import es.cervecitas.earthquakeobserver.model.service.ServiceConfig;
+import es.cervecitas.earthquakeobserver.model.service.repository.EarthquakeDataRepository;
 
 @Module
 public class RepositoryModule {

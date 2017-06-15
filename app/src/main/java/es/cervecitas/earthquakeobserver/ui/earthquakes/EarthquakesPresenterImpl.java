@@ -11,8 +11,7 @@ import javax.inject.Inject;
 import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
-import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
-import es.cervecitas.earthquakeobserver.service.repository.EarthquakeDataRepository;
+import es.cervecitas.earthquakeobserver.model.service.repository.EarthquakeDataRepository;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -22,8 +21,8 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     @Inject
     EarthquakeDataRepository repository;
 
-    @Inject
-    EarthquakeEventAPI earthquakeEventAPI;
+//    @Inject
+//    EarthquakeEventAPI earthquakeEventAPI;
 
     @Inject
     Context context;

@@ -1,9 +1,9 @@
-package es.cervecitas.earthquakeobserver.service;
+package es.cervecitas.earthquakeobserver.model.service;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
 import io.reactivex.Observable;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
