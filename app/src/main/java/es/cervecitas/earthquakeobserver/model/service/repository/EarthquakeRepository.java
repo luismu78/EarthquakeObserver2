@@ -28,11 +28,11 @@ public class EarthquakeRepository extends BaseRepository {
     public Observable<List<Earthquake>> getEarthquakeData(
             String format, String eventtype, String orderby, long minmag, final int limit, String startdate) {
 
-        Observable<List<Earthquake>> remoteData = getRemoteEarthquakeData(format, eventtype, orderby, minmag, limit, startdate);
+
 
         return cacheObservable(
                 CACHE_PREFIX_GET_EARTHQUAKES + format + eventtype + orderby + minmag + limit + startdate,
-                remoteData);
+                getRemoteEarthquakeData(format, eventtype, orderby, minmag, limit, startdate));
     }
 
     private Observable<List<Earthquake>> getRemoteEarthquakeData(

@@ -16,6 +16,9 @@ abstract class BaseRepository {
 
     <T> Observable<T> cacheObservable(String startDateLimitMinMag, Observable<T> observable) {
 
+        // TODO: no cachear el observable
+        // TODO: cachear el resultado del observable
+
         Observable<T> cachedObservable = (Observable<T>) apiObservables.get(startDateLimitMinMag);
         if (cachedObservable != null) {
             return cachedObservable;
