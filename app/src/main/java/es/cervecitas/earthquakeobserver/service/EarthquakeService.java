@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.repository;
+package es.cervecitas.earthquakeobserver.service;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
