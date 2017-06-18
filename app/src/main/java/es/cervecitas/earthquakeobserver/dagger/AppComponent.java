@@ -11,7 +11,6 @@ import es.cervecitas.earthquakeobserver.ui.earthquakes.EarthquakesPresenterImpl;
         modules = {
                 AppModule.class,
                 PresenterModule.class,
-                NetworkModule.class,
                 RepositoryModule.class
         })
 public interface AppComponent {
