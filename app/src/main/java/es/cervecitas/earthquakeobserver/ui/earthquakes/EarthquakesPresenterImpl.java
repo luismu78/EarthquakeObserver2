@@ -42,6 +42,9 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     public void getEarthquakes() {
         view.showLoading();
 
+        //TODO: pedir los datos primero a la cache. Si no los tiene hacer peticion REST
+        // Si los datos de la cache estan caducados hacer peticion al repositorio rest
+
         repository.getEarthquakes(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
                 .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
                 .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits

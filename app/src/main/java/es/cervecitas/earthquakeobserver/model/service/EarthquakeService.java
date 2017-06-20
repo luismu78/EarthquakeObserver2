@@ -1,5 +1,7 @@
 package es.cervecitas.earthquakeobserver.model.service;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -48,14 +50,21 @@ public class EarthquakeService {
     }
 
     public Observable<EarthquakeObjects> getEarthquakeObjects(
-            String format,
-            String eventType,
-            String orderBy,
-            long minMag,
-            int limit,
-            String startDate) {
+            final String format,
+            final String eventType,
+            final String orderBy,
+            final long minMag,
+            final int limit,
+            final String startDate) {
 
         return service.getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate);
+
+//        return Observable.fromCallable(new Callable<EarthquakeObjects>() {
+//            @Override
+//            public EarthquakeObjects call() throws Exception {
+//                return service.getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate);
+//            }
+//        });
     }
 
     private EarthquakeServiceInterface buildService() {
@@ -76,7 +85,7 @@ public class EarthquakeService {
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(new Interceptor() {
                     @Override
-                    public Response intercept(Chain chain) throws IOException {
+                    public Response intercept(@NonNull Chain chain) throws IOException {
                         Request request = chain
                                 .request()
                                 .newBuilder()
