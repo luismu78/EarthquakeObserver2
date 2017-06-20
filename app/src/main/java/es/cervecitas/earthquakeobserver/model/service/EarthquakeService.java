@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -59,13 +58,6 @@ public class EarthquakeService {
             final String startDate) {
 
         return service.getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate);
-
-//        return Observable.fromCallable(new Callable<EarthquakeObjects>() {
-//            @Override
-//            public EarthquakeObjects call() throws Exception {
-//                return service.getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate);
-//            }
-//        });
     }
 
     private EarthquakeServiceInterface buildService() {

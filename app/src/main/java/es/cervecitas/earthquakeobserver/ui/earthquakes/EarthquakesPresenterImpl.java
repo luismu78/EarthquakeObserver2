@@ -11,9 +11,10 @@ import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
 import es.cervecitas.earthquakeobserver.model.service.repository.EarthquakeDataRepository;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 
 public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
@@ -45,23 +46,32 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
         //TODO: pedir los datos primero a la cache. Si no los tiene hacer peticion REST
         // Si los datos de la cache estan caducados hacer peticion al repositorio rest
 
-        repository.getEarthquakes(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
-                .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
-                .subscribe(new Consumer<Earthquake>() {
+        repository
+                .getEarthquakes(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Earthquake>() {
                     @Override
-                    public void accept(@NonNull Earthquake earthquake) throws Exception {
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Earthquake earthquake) {
                         view.displayEarthquake(earthquake);
+                        view.hideErrorMessage();
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        view.showErrorMessage();
+                        view.hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
                         view.hideLoading();
                     }
                 });
-
-//                .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
-//                    @Override
-//                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
-//                        view.displayEarthquake(earthquakes);
-//                        view.hideLoading();
-//                    }
-//                });
     }
 
     private String getFormat() {
