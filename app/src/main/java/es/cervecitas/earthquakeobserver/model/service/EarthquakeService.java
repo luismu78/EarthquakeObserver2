@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -35,7 +36,7 @@ public class EarthquakeService {
         String PARAM_STARTDATE = "starttime";
 
         @GET("query")
-        Observable<EarthquakeObjects> getEarthquakeObjects(
+        Single<EarthquakeObjects> getEarthquakeObjects(
                 @Query(PARAM_FORMAT) String format,
                 @Query(PARAM_EVENT_TYPE) String eventtype,
                 @Query(PARAM_ORDER_BY) String orderby,
@@ -49,7 +50,7 @@ public class EarthquakeService {
         service = buildService();
     }
 
-    public Observable<EarthquakeObjects> getEarthquakeObjects(
+    public Single<EarthquakeObjects> getEarthquakeObjects(
             final String format,
             final String eventType,
             final String orderBy,

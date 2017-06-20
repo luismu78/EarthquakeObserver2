@@ -10,7 +10,11 @@ public interface EarthquakesView {
 
     void hideLoading();
 
-    void showEarthquakeList(List<Earthquake> earthquakeItemList);
+//    void displayEarthquake(List<Earthquake> earthquakeItemList);
+
+    void displayEarthquake(Earthquake earthquakeItemList);
+
+    void clearEarthquakes();
 
     void showErrorMessage();
 
