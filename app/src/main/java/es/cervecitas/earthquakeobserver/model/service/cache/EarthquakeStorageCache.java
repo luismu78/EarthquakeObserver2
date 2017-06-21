@@ -1,7 +1,6 @@
 package es.cervecitas.earthquakeobserver.model.service.cache;
 
 import android.support.v4.util.LruCache;
-import android.util.Log;
 
 import java.util.concurrent.Callable;
 
@@ -17,15 +16,12 @@ public class EarthquakeStorageCache {
         return Observable.fromCallable(new Callable<EarthquakeObjects>() {
             @Override
             public EarthquakeObjects call() throws Exception {
-                Log.d("HOLA", "cache.get(key) - key --> " + key);
                 EarthquakeObjects cachedEarthquakeObjects = cache.get(key);
 
                 if (cachedEarthquakeObjects != null) {
-                    Log.d("HOLA", "cache hit");
                     return cachedEarthquakeObjects;
                 }
 
-                Log.d("HOLA", "cache fail");
                 throw new EarthquakeObjectsNotInCacheException();
             }
         }).subscribeOn(Schedulers.io()); // important

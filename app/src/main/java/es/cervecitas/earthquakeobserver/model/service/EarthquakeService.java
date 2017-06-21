@@ -1,7 +1,6 @@
 package es.cervecitas.earthquakeobserver.model.service;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -58,8 +57,6 @@ public class EarthquakeService {
             final long minMag,
             final int limit,
             final String startDate) {
-
-        Log.d("HOLA", getClass().getSimpleName() + " getEarthquakeObjects - " + format + "-" + eventType + "-" + orderBy + "-" + minMag + "-" + limit + "-" + startDate);
 
         return service
                 .getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate)

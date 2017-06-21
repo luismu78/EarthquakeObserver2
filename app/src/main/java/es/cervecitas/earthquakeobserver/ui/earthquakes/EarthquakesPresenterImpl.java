@@ -3,7 +3,6 @@ package es.cervecitas.earthquakeobserver.ui.earthquakes;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,22 +15,14 @@ import es.cervecitas.earthquakeobserver.model.Earthquake;
 import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.model.network.Feature;
 import es.cervecitas.earthquakeobserver.model.service.cache.EarthquakeStorage;
-import es.cervecitas.earthquakeobserver.model.service.repository.EarthquakeDataRepository;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Single;
-import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 public class EarthquakesPresenterImpl implements EarthquakesPresenter {
-
-    @Inject
-    EarthquakeDataRepository repository;
 
     @Inject
     EarthquakeStorage storage;
@@ -57,9 +48,6 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
     public void getEarthquakes() {
         view.showLoading();
         view.clearEarthquakes();
-
-        //TODO: pedir los datos primero a la cache. Si no los tiene hacer peticion REST
-        // Si los datos de la cache estan caducados hacer peticion al repositorio rest
 
         storage
                 .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
@@ -116,34 +104,6 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                         view.hideLoading();
                     }
                 });
-
-
-//        repository
-//                .getEarthquakes(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<Earthquake>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(@NonNull Earthquake earthquake) {
-//                        view.displayEarthquake(earthquake);
-//                        view.hideErrorMessage();
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        view.showErrorMessage();
-//                        view.hideLoading();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        view.hideLoading();
-//                    }
-//                });
     }
 
     private String getFormat() {
