@@ -15,10 +15,8 @@ import es.cervecitas.earthquakeobserver.model.Earthquake;
 import es.cervecitas.earthquakeobserver.network.EarthquakeEventAPI;
 import es.cervecitas.earthquakeobserver.network.model.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.network.model.Feature;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -83,33 +81,13 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
-                .subscribe(new SingleObserver<List<Earthquake>>() {
+                .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull List<Earthquake> earthquakes) {
-                        view.hideLoading();
-                        view.hideErrorMessage();
+                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
                         view.showEarthquakeList(earthquakes);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
                         view.hideLoading();
-                        view.showEarthquakeList(new ArrayList<Earthquake>());
-                        view.showErrorMessage();
                     }
                 });
-//                .subscribe(new Consumer<List<Earthquake>>() { // Subscribes to a Single and provides a callback to handle the item it emits
-//                    @Override
-//                    public void accept(@NonNull List<Earthquake> earthquakes) throws Exception {
-//                        view.showEarthquakeList(earthquakes);
-//                        view.hideLoading();
-//                    }
-//                });
     }
 
     private String getFormat() {
