@@ -1,12 +1,14 @@
 package es.cervecitas.earthquakeobserver.model.service;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -57,7 +59,11 @@ public class EarthquakeService {
             final int limit,
             final String startDate) {
 
-        return service.getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate);
+        Log.d("HOLA", getClass().getSimpleName() + " getEarthquakeObjects - " + format + "-" + eventType + "-" + orderBy + "-" + minMag + "-" + limit + "-" + startDate);
+
+        return service
+                .getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate)
+                .subscribeOn(Schedulers.io());
     }
 
     private EarthquakeServiceInterface buildService() {
