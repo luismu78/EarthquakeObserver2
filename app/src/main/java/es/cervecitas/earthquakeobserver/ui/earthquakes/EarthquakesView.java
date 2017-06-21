@@ -12,7 +12,7 @@ public interface EarthquakesView {
 
     void clearEarthquakes();
 
-    void showErrorMessage();
+    void showErrorMessage(String title, String subTitle, boolean showLogo);
 
     void hideErrorMessage();
 

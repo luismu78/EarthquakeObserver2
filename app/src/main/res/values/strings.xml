@@ -80,7 +80,8 @@
     <string name="no_earthquakes">No earthquakes</string>
 
     <!-- Error Messages -->
-    <string name="no_data_found">No Data Found</string>
-    <string name="try_later">Try Later</string>
+    <string name="error_no_data_found">No results</string>
+    <string name="error_no_connection_to_server">Cannot connect to server</string>
+    <string name="error_try_later">Try later</string>
 
 </resources>

@@ -95,7 +95,10 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        view.showErrorMessage();
+                        view.showErrorMessage(
+                                context.getResources().getString(R.string.error_no_connection_to_server),
+                                context.getResources().getString(R.string.error_try_later),
+                                true);
                         view.hideLoading();
                     }
 
@@ -103,7 +106,7 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                     public void onComplete() {
                         view.hideLoading();
                         if (view.numberOfEarthquakes() == 0) {
-                            view.showErrorMessage();
+                            view.showErrorMessage(context.getResources().getString(R.string.error_no_data_found), null, false);
                         }
                     }
                 });

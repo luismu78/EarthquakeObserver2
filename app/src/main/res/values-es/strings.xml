@@ -64,6 +64,9 @@
     <string name="action_settings">Configuración</string>
     <string name="no_internet_connection">No hay conexión a internet</string>
     <string name="no_earthquakes">No hay terremotos</string>
-    <string name="no_data_found">Sin Datos</string>
-    <string name="try_later">Intente Más Tarde</string>
+
+    <!-- Error Messages -->
+    <string name="error_no_data_found">No hay resultados</string>
+    <string name="error_no_connection_to_server">No se puede conectar al servidor</string>
+    <string name="error_try_later">Intentelo más tarde</string>
 </resources>

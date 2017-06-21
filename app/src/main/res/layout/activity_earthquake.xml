@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Layout for a list of earthquakes -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
@@ -22,34 +22,43 @@
 
     <!-- Empty view is only visible when the list has no items. -->
 
-    <ImageView
-        android:id="@+id/imgNoEarthquakes"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/llNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:src="@mipmap/ic_launcher"/>
-    <TextView
-        android:id="@+id/empty_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imgNoEarthquakes"
-        android:layout_centerHorizontal="true"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:visibility="gone"
-        tools:text="No Earthquakes"/>
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/sub_empty_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/empty_view"
-        android:layout_centerHorizontal="true"
-        android:textSize="14sp"
-        android:textColor="#000000"
-        android:visibility="gone"
-        tools:text="Try Later"/>
+        <ImageView
+            android:id="@+id/imgNoEarthquakes"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/ic_launcher"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="No Earthquakes" />
+
+        <TextView
+            android:id="@+id/sub_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="Try Later" />
+
+    </LinearLayout>
 
 </RelativeLayout>

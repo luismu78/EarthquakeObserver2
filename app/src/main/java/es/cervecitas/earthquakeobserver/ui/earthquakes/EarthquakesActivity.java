@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
 
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.llNoData)
+    LinearLayout llNoData;
 
     @BindView(R.id.imgNoEarthquakes)
     ImageView imgNoEarthqueakes;
@@ -98,25 +102,44 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
 
     @Override
     public void clearEarthquakes() {
-        visibleEarthquakes = new ArrayList<Earthquake>();
+        visibleEarthquakes = new ArrayList<>();
         rvEarthquakes.setAdapter(new EarthquakeAdapter(this, visibleEarthquakes));
         rvEarthquakes.getAdapter().notifyDataSetChanged();
     }
 
     @Override
-    public void showErrorMessage() {
-        imgNoEarthqueakes.setVisibility(View.VISIBLE);
-        emptyView.setText(R.string.no_data_found);
-        emptyView.setVisibility(View.VISIBLE);
-        subEmptyView.setText(R.string.try_later);
-        subEmptyView.setVisibility(View.VISIBLE);
+    public void showErrorMessage(String title, String subTitle, boolean showLogo) {
+
+        llNoData.setVisibility(View.VISIBLE);
+
+        if (showLogo) {
+            imgNoEarthqueakes.setVisibility(View.VISIBLE);
+        } else {
+            imgNoEarthqueakes.setVisibility(View.GONE);
+        }
+
+        if (title != null) {
+            emptyView.setText(title);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            emptyView.setVisibility(View.GONE);
+        }
+
+        if (subTitle != null) {
+            subEmptyView.setText(subTitle);
+            subEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            subEmptyView.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void hideErrorMessage() {
-        imgNoEarthqueakes.setVisibility(View.GONE);
-        emptyView.setVisibility(View.GONE);
-        subEmptyView.setVisibility(View.GONE);
+        llNoData.setVisibility(View.GONE);
+//        imgNoEarthqueakes.setVisibility(View.GONE);
+//        emptyView.setVisibility(View.GONE);
+//        subEmptyView.setVisibility(View.GONE);
     }
 
     @Override
