@@ -102,6 +102,9 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
                     @Override
                     public void onComplete() {
                         view.hideLoading();
+                        if (view.numberOfEarthquakes() == 0) {
+                            view.showErrorMessage();
+                        }
                     }
                 });
     }

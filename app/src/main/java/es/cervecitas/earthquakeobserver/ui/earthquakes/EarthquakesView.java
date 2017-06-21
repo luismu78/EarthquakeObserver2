@@ -16,5 +16,7 @@ public interface EarthquakesView {
 
     void hideErrorMessage();
 
+    int numberOfEarthquakes();
+
     void launchEarthquakeDetail(Earthquake earthquake);
 }

@@ -120,6 +120,11 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
     }
 
     @Override
+    public int numberOfEarthquakes() {
+        return rvEarthquakes.getAdapter().getItemCount();
+    }
+
+    @Override
     public void launchEarthquakeDetail(Earthquake earthquake) {
         Uri earthquakeUri = Uri.parse(earthquake.getUrl());
         Intent showEarthquakeIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
