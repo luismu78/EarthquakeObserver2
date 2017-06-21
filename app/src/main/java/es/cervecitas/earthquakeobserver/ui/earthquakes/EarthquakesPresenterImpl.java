@@ -49,6 +49,7 @@ public class EarthquakesPresenterImpl implements EarthquakesPresenter {
 
         earthquakeEventAPI
                 .getEarthquakeObjects(getFormat(), getEventType(), getOrderBy(), getMinMag(), getLimit(), getStartDate())
+                .cache()
                 .subscribeOn(Schedulers.io()) // Asynchronously subscribes subscribers to this Single on the specified scheduler
                 .observeOn(Schedulers.io()) // Modifies a Single to emit its item (or notify of its error) on a specified Scheduler
                 .onErrorReturn(new Function<Throwable, EarthquakeObjects>() {
