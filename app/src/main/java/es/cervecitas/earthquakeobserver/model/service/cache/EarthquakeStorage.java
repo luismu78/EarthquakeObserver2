@@ -31,24 +31,10 @@ public class EarthquakeStorage {
 
         final String key = getKey(format, eventType, orderBy, minMag, limit, startDate);
 
-        Log.d("HOLA", "key: " + key);
+        Log.d("HOLA", "key(initial): " + key);
 
         return cache
                 .getEarthquakeObjects(key)
-//                .doOnEach(new Consumer<Notification<EarthquakeObjects>>() {
-//                    @Override
-//                    public void accept(@NonNull Notification<EarthquakeObjects> earthquakeObjectsNotification) throws Exception {
-//                        Log.d("HOLA", "Notification error: " + earthquakeObjectsNotification.getError().toString());
-//                        Log.d("HOLA", "Notification value: " + earthquakeObjectsNotification.getValue().toString());
-//                    }
-//                })
-                .doOnEach(new Consumer<Notification<EarthquakeObjects>>() {
-                    @Override
-                    public void accept(@NonNull Notification<EarthquakeObjects> earthquakeObjectsNotification) throws Exception {
-                        Log.d("HOLA", getClass().getSimpleName() + " - Error: " + earthquakeObjectsNotification.getError().toString());
-                        Log.d("HOLA", getClass().getSimpleName() + " - Value: " + earthquakeObjectsNotification.getValue().toString());
-                    }
-                })
                 .onErrorResumeNext(new Function<Throwable, ObservableSource<? extends EarthquakeObjects>>() {
                     @Override
                     public ObservableSource<? extends EarthquakeObjects> apply(@NonNull Throwable throwable) throws Exception {
@@ -68,7 +54,7 @@ public class EarthquakeStorage {
                                 .doOnNext(new Consumer<EarthquakeObjects>() {
                                     @Override
                                     public void accept(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
-                                        Log.d("HOLA", "getEarthquakeObjects - onNext");
+                                        Log.d("HOLA", "getEarthquakeObjects - key(read) -> " + key);
                                         cache.addEarthquakeObject(key, earthquakeObjects);
                                     }
                                 })
