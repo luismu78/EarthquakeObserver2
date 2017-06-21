@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,8 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
 
     @BindView(R.id.sub_empty_view)
     TextView subEmptyView;
+
+    ArrayList<Earthquake> visibleEarthquakes = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,15 +92,29 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
     }
 
     @Override
-    public void showEarthquakeList(List<Earthquake> earthquakeItemList) {
-        if (earthquakeItemList.size() == 0) {
-            showErrorMessage();
-        } else {
-            hideErrorMessage();
-            rvEarthquakes.setAdapter(new EarthquakeAdapter(this, earthquakeItemList));
-            rvEarthquakes.getAdapter().notifyDataSetChanged();
-        }
+    public void displayEarthquake(Earthquake earthquake) {
+        visibleEarthquakes.add(earthquake);
+        rvEarthquakes.setAdapter(new EarthquakeAdapter(this, visibleEarthquakes));
+        rvEarthquakes.getAdapter().notifyDataSetChanged();
     }
+
+    @Override
+    public void clearEarthquakes() {
+        visibleEarthquakes = new ArrayList<Earthquake>();
+        rvEarthquakes.setAdapter(new EarthquakeAdapter(this, visibleEarthquakes));
+        rvEarthquakes.getAdapter().notifyDataSetChanged();
+    }
+
+    //    @Override
+//    public void displayEarthquake(List<Earthquake> earthquakeItemList) {
+//        if (earthquakeItemList.size() == 0) {
+//            showErrorMessage();
+//        } else {
+//            hideErrorMessage();
+//            rvEarthquakes.setAdapter(new EarthquakeAdapter(this, earthquakeItemList));
+//            rvEarthquakes.getAdapter().notifyDataSetChanged();
+//        }
+//    }
 
     @Override
     public void showErrorMessage() {

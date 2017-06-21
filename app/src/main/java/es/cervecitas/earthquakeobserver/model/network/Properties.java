@@ -1,5 +1,5 @@
 
-package es.cervecitas.earthquakeobserver.network.model;
+package es.cervecitas.earthquakeobserver.model.network;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
