@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -104,17 +102,6 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         rvEarthquakes.setAdapter(new EarthquakeAdapter(this, visibleEarthquakes));
         rvEarthquakes.getAdapter().notifyDataSetChanged();
     }
-
-    //    @Override
-//    public void displayEarthquake(List<Earthquake> earthquakeItemList) {
-//        if (earthquakeItemList.size() == 0) {
-//            showErrorMessage();
-//        } else {
-//            hideErrorMessage();
-//            rvEarthquakes.setAdapter(new EarthquakeAdapter(this, earthquakeItemList));
-//            rvEarthquakes.getAdapter().notifyDataSetChanged();
-//        }
-//    }
 
     @Override
     public void showErrorMessage() {

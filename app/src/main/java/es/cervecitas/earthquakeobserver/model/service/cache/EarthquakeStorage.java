@@ -1,7 +1,5 @@
 package es.cervecitas.earthquakeobserver.model.service.cache;
 
-import android.util.Log;
-
 import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.model.service.EarthquakeService;
 import io.reactivex.Notification;
@@ -21,7 +19,7 @@ public class EarthquakeStorage {
         this.earthquakeService = earthquakeService;
     }
 
-    public Observable<EarthquakeObjects> getEarthquakeObjects( //TODO: usar esto
+    public Observable<EarthquakeObjects> getEarthquakeObjects(
             final String format,
             final String eventType,
             final String orderBy,
@@ -29,53 +27,32 @@ public class EarthquakeStorage {
             final int limit,
             final String startDate) {
 
-        final String key = getKey(format, eventType, orderBy, minMag, limit, startDate);
-
-        Log.d("HOLA", "key(initial): " + key);
+        final String key = getKey(orderBy, minMag, limit, startDate);
 
         return cache
                 .getEarthquakeObjects(key)
                 .onErrorResumeNext(new Function<Throwable, ObservableSource<? extends EarthquakeObjects>>() {
                     @Override
                     public ObservableSource<? extends EarthquakeObjects> apply(@NonNull Throwable throwable) throws Exception {
-
-                        Log.d("HOLA", getClass().getSimpleName() + " onErrorResumeNext ");
-
                         return earthquakeService
                                 .getEarthquakeObjects(format, eventType, orderBy, minMag, limit, startDate)
                                 .toObservable()
-                                .doOnEach(new Consumer<Notification<EarthquakeObjects>>() {
-                                    @Override
-                                    public void accept(@NonNull Notification<EarthquakeObjects> earthquakeObjectsNotification) throws Exception {
-                                        Log.d("HOLA", getClass().getSimpleName() + " - earthquakeService - errors: " + earthquakeObjectsNotification.getError());
-                                        Log.d("HOLA", getClass().getSimpleName() + " - earthquakeService - value: " + earthquakeObjectsNotification.getValue());
-                                    }
-                                })
                                 .doOnNext(new Consumer<EarthquakeObjects>() {
                                     @Override
                                     public void accept(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
-                                        Log.d("HOLA", "getEarthquakeObjects - key(read) -> " + key);
                                         cache.addEarthquakeObject(key, earthquakeObjects);
                                     }
                                 })
                                 .doOnComplete(new Action() {
                                     @Override
                                     public void run() throws Exception {
-                                        Log.d("HOLA", "getEarthquakeObjects - onComplete");
-
                                     }
                                 });
-//                                .doOnSuccess(new Consumer<EarthquakeObjects>() {
-//                                    @Override
-//                                    public void accept(@NonNull EarthquakeObjects earthquakeObjects) throws Exception {
-//                                        cache.addEarthquakeObject(key, earthquakeObjects);
-//                                    }
-//                                });
                     }
                 });
     }
 
-    private String getKey(String format, String eventType, String orderBy, long minMag, int limit, String startDate) {
+    private String getKey(String orderBy, long minMag, int limit, String startDate) {
         return startDate + orderBy + minMag + limit;
     }
 }
