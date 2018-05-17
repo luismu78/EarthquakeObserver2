@@ -2,8 +2,6 @@ package es.cervecitas.earthquakeobserver.app;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
-
 import es.cervecitas.earthquakeobserver.dagger.AppComponent;
 import es.cervecitas.earthquakeobserver.dagger.AppModule;
 import es.cervecitas.earthquakeobserver.dagger.DaggerAppComponent;
@@ -17,7 +15,7 @@ public class EarthquakeObserverApplication extends Application {
         super.onCreate();
         appComponent = initDagger(this);
 
-        initLeakCannary();
+//        initLeakCannary();
     }
 
     public AppComponent getAppComponent() {
@@ -30,13 +28,13 @@ public class EarthquakeObserverApplication extends Application {
                 .build();
     }
 
-    private void initLeakCannary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-
-        LeakCanary.install(this);
-    }
+//    private void initLeakCannary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//
+//        LeakCanary.install(this);
+//    }
 }
