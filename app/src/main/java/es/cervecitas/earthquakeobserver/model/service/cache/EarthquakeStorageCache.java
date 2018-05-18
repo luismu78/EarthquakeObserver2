@@ -4,7 +4,7 @@ import android.support.v4.util.LruCache;
 
 import java.util.concurrent.Callable;
 
-import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.data.net.model.EarthquakeObjects;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 

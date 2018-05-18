@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import es.cervecitas.earthquakeobserver.model.Earthquake;
-import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
-import es.cervecitas.earthquakeobserver.model.network.Feature;
+import es.cervecitas.earthquakeobserver.data.net.model.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.data.net.model.Feature;
 import es.cervecitas.earthquakeobserver.model.service.EarthquakeService;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

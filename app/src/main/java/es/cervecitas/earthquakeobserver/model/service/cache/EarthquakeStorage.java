@@ -1,6 +1,6 @@
 package es.cervecitas.earthquakeobserver.model.service.cache;
 
-import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.data.net.model.EarthquakeObjects;
 import es.cervecitas.earthquakeobserver.model.service.EarthquakeService;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

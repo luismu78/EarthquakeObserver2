@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import es.cervecitas.earthquakeobserver.model.network.EarthquakeObjects;
+import es.cervecitas.earthquakeobserver.data.net.model.EarthquakeObjects;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
