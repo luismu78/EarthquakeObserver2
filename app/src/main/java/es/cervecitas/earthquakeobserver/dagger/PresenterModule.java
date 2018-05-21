@@ -6,8 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import es.cervecitas.earthquakeobserver.ui.earthquakes.EarthquakesPresenter;
-import es.cervecitas.earthquakeobserver.ui.earthquakes.EarthquakesPresenterImpl;
+import es.cervecitas.earthquakeobserver.presentation.ui.earthquakes.EarthquakesPresenter;
+import es.cervecitas.earthquakeobserver.presentation.ui.earthquakes.EarthquakesPresenterImpl;
 
 @Module
 public class PresenterModule {

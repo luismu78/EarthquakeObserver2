@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.ui.preferences;
+package es.cervecitas.earthquakeobserver.presentation.ui.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

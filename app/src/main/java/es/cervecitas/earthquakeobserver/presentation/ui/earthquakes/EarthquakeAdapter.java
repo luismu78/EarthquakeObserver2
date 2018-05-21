@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.ui.earthquakes;
+package es.cervecitas.earthquakeobserver.presentation.ui.earthquakes;
 
 import android.content.Context;
 import android.content.Intent;

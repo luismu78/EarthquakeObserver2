@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.ui.preferences;
+package es.cervecitas.earthquakeobserver.presentation.ui.preferences;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

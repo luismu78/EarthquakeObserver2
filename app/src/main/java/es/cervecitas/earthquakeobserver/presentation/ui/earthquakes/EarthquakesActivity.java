@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.ui.earthquakes;
+package es.cervecitas.earthquakeobserver.presentation.ui.earthquakes;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -21,12 +21,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import es.cervecitas.earthquakeobserver.R;
-import es.cervecitas.earthquakeobserver.app.EarthquakeObserverApplication;
 import es.cervecitas.earthquakeobserver.model.Earthquake;
-import es.cervecitas.earthquakeobserver.ui.preferences.EarthquakesPreferencesActivity;
+import es.cervecitas.earthquakeobserver.presentation.ui.common.BaseActivity;
+import es.cervecitas.earthquakeobserver.presentation.ui.preferences.EarthquakesPreferencesActivity;
 
-public class EarthquakesActivity extends AppCompatActivity implements EarthquakesView {
+public class EarthquakesActivity extends BaseActivity implements EarthquakesView {
 
     @Inject
     EarthquakesPresenter presenter;
@@ -56,7 +57,7 @@ public class EarthquakesActivity extends AppCompatActivity implements Earthquake
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_earthquake);
 
-        ((EarthquakeObserverApplication) getApplication()).getAppComponent().inject(this);
+//        ((EarthquakeObserverApplication) getApplication()).getAppComponent().inject(this);
 
         ButterKnife.bind(this);
 

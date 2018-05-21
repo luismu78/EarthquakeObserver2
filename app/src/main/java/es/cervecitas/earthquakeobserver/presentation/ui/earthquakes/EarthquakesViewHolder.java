@@ -1,4 +1,4 @@
-package es.cervecitas.earthquakeobserver.ui.earthquakes;
+package es.cervecitas.earthquakeobserver.presentation.ui.earthquakes;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

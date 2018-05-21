@@ -7,9 +7,11 @@ import javax.inject.Singleton;
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.support.AndroidSupportInjectionModule;
+import es.cervecitas.earthquakeobserver.presentation.PresentationModule;
 
 @Module(includes = {
-        AndroidSupportInjectionModule.class
+        AndroidSupportInjectionModule.class,
+        PresentationModule.class
 })
 abstract class AppModule {
 
