@@ -1,6 +1,7 @@
 package es.cervecitas.earthquakeobserver.data.net;
 
 import es.cervecitas.earthquakeobserver.data.net.model.EarthquakeObjects;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,7 +16,7 @@ public interface USGSApi {
     String PARAM_STARTDATE = "starttime";
 
     @GET("query")
-    Single<EarthquakeObjects> getEarthquakeObjects(
+    Observable<EarthquakeObjects> getEarthquakeObjects(
             @Query(PARAM_FORMAT) String format,
             @Query(PARAM_EVENT_TYPE) String eventtype,
             @Query(PARAM_ORDER_BY) String orderby,
