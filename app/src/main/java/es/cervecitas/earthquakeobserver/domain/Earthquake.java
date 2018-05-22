@@ -9,7 +9,7 @@ public class Earthquake implements DomainObject {
     private final Calendar dateTime;
     private String url;
 
-    public Earthquake(Builder builder) {
+    private Earthquake(Builder builder) {
         this.magnitude = builder.magnitude;
         this.location = builder.location;
         this.dateTime = builder.dateTime;
