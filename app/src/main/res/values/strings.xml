@@ -83,5 +83,6 @@
     <string name="error_no_data_found">No results</string>
     <string name="error_no_connection_to_server">Cannot connect to server</string>
     <string name="error_try_later">Try later</string>
+    <string name="click_to_retry">Click to retry</string>
 
 </resources>

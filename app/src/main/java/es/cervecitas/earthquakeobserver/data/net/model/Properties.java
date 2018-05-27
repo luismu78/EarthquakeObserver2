@@ -1,28 +1,26 @@
 
 package es.cervecitas.earthquakeobserver.data.net.model;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("org.jsonschema2pojo")
 public class Properties {
 
     @SerializedName("mag")
     @Expose
-    private double mag;
+    private Double mag;
     @SerializedName("place")
     @Expose
     private String place;
     @SerializedName("time")
     @Expose
-    private long time;
+    private String time;
     @SerializedName("updated")
     @Expose
-    private long updated;
+    private String updated;
     @SerializedName("tz")
     @Expose
-    private long tz;
+    private Integer tz;
     @SerializedName("url")
     @Expose
     private String url;
@@ -31,13 +29,13 @@ public class Properties {
     private String detail;
     @SerializedName("felt")
     @Expose
-    private long felt;
+    private Integer felt;
     @SerializedName("cdi")
     @Expose
-    private double cdi;
+    private Double cdi;
     @SerializedName("mmi")
     @Expose
-    private double mmi;
+    private Double mmi;
     @SerializedName("alert")
     @Expose
     private String alert;
@@ -46,10 +44,10 @@ public class Properties {
     private String status;
     @SerializedName("tsunami")
     @Expose
-    private long tsunami;
+    private Integer tsunami;
     @SerializedName("sig")
     @Expose
-    private long sig;
+    private Integer sig;
     @SerializedName("net")
     @Expose
     private String net;
@@ -70,13 +68,13 @@ public class Properties {
     private Object nst;
     @SerializedName("dmin")
     @Expose
-    private double dmin;
+    private Double dmin;
     @SerializedName("rms")
     @Expose
-    private double rms;
+    private Double rms;
     @SerializedName("gap")
     @Expose
-    private long gap;
+    private Integer gap;
     @SerializedName("magType")
     @Expose
     private String magType;
@@ -87,470 +85,210 @@ public class Properties {
     @Expose
     private String title;
 
-    /**
-     * 
-     * @return
-     *     The mag
-     */
-    public double getMag() {
+    public Double getMag() {
         return mag;
     }
 
-    /**
-     * 
-     * @param mag
-     *     The mag
-     */
-    public void setMag(double mag) {
+    public void setMag(Double mag) {
         this.mag = mag;
     }
 
-    /**
-     * 
-     * @return
-     *     The place
-     */
     public String getPlace() {
         return place;
     }
 
-    /**
-     * 
-     * @param place
-     *     The place
-     */
     public void setPlace(String place) {
         this.place = place;
     }
 
-    /**
-     * 
-     * @return
-     *     The time
-     */
-    public long getTime() {
+    public String getTime() {
         return time;
     }
 
-    /**
-     * 
-     * @param time
-     *     The time
-     */
-    public void setTime(long time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    /**
-     * 
-     * @return
-     *     The updated
-     */
-    public long getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 
-    /**
-     * 
-     * @param updated
-     *     The updated
-     */
-    public void setUpdated(long updated) {
+    public void setUpdated(String updated) {
         this.updated = updated;
     }
 
-    /**
-     * 
-     * @return
-     *     The tz
-     */
-    public long getTz() {
+    public Integer getTz() {
         return tz;
     }
 
-    /**
-     * 
-     * @param tz
-     *     The tz
-     */
-    public void setTz(long tz) {
+    public void setTz(Integer tz) {
         this.tz = tz;
     }
 
-    /**
-     * 
-     * @return
-     *     The url
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * 
-     * @param url
-     *     The url
-     */
     public void setUrl(String url) {
         this.url = url;
     }
 
-    /**
-     * 
-     * @return
-     *     The detail
-     */
     public String getDetail() {
         return detail;
     }
 
-    /**
-     * 
-     * @param detail
-     *     The detail
-     */
     public void setDetail(String detail) {
         this.detail = detail;
     }
 
-    /**
-     * 
-     * @return
-     *     The felt
-     */
-    public long getFelt() {
+    public Integer getFelt() {
         return felt;
     }
 
-    /**
-     * 
-     * @param felt
-     *     The felt
-     */
-    public void setFelt(long felt) {
+    public void setFelt(Integer felt) {
         this.felt = felt;
     }
 
-    /**
-     * 
-     * @return
-     *     The cdi
-     */
-    public double getCdi() {
+    public Double getCdi() {
         return cdi;
     }
 
-    /**
-     * 
-     * @param cdi
-     *     The cdi
-     */
-    public void setCdi(double cdi) {
+    public void setCdi(Double cdi) {
         this.cdi = cdi;
     }
 
-    /**
-     * 
-     * @return
-     *     The mmi
-     */
-    public double getMmi() {
+    public Double getMmi() {
         return mmi;
     }
 
-    /**
-     * 
-     * @param mmi
-     *     The mmi
-     */
-    public void setMmi(double mmi) {
+    public void setMmi(Double mmi) {
         this.mmi = mmi;
     }
 
-    /**
-     * 
-     * @return
-     *     The alert
-     */
     public String getAlert() {
         return alert;
     }
 
-    /**
-     * 
-     * @param alert
-     *     The alert
-     */
     public void setAlert(String alert) {
         this.alert = alert;
     }
 
-    /**
-     * 
-     * @return
-     *     The status
-     */
     public String getStatus() {
         return status;
     }
 
-    /**
-     * 
-     * @param status
-     *     The status
-     */
     public void setStatus(String status) {
         this.status = status;
     }
 
-    /**
-     * 
-     * @return
-     *     The tsunami
-     */
-    public long getTsunami() {
+    public Integer getTsunami() {
         return tsunami;
     }
 
-    /**
-     * 
-     * @param tsunami
-     *     The tsunami
-     */
-    public void setTsunami(long tsunami) {
+    public void setTsunami(Integer tsunami) {
         this.tsunami = tsunami;
     }
 
-    /**
-     * 
-     * @return
-     *     The sig
-     */
-    public long getSig() {
+    public Integer getSig() {
         return sig;
     }
 
-    /**
-     * 
-     * @param sig
-     *     The sig
-     */
-    public void setSig(long sig) {
+    public void setSig(Integer sig) {
         this.sig = sig;
     }
 
-    /**
-     * 
-     * @return
-     *     The net
-     */
     public String getNet() {
         return net;
     }
 
-    /**
-     * 
-     * @param net
-     *     The net
-     */
     public void setNet(String net) {
         this.net = net;
     }
 
-    /**
-     * 
-     * @return
-     *     The code
-     */
     public String getCode() {
         return code;
     }
 
-    /**
-     * 
-     * @param code
-     *     The code
-     */
     public void setCode(String code) {
         this.code = code;
     }
 
-    /**
-     * 
-     * @return
-     *     The ids
-     */
     public String getIds() {
         return ids;
     }
 
-    /**
-     * 
-     * @param ids
-     *     The ids
-     */
     public void setIds(String ids) {
         this.ids = ids;
     }
 
-    /**
-     * 
-     * @return
-     *     The sources
-     */
     public String getSources() {
         return sources;
     }
 
-    /**
-     * 
-     * @param sources
-     *     The sources
-     */
     public void setSources(String sources) {
         this.sources = sources;
     }
 
-    /**
-     * 
-     * @return
-     *     The types
-     */
     public String getTypes() {
         return types;
     }
 
-    /**
-     * 
-     * @param types
-     *     The types
-     */
     public void setTypes(String types) {
         this.types = types;
     }
 
-    /**
-     * 
-     * @return
-     *     The nst
-     */
     public Object getNst() {
         return nst;
     }
 
-    /**
-     * 
-     * @param nst
-     *     The nst
-     */
     public void setNst(Object nst) {
         this.nst = nst;
     }
 
-    /**
-     * 
-     * @return
-     *     The dmin
-     */
-    public double getDmin() {
+    public Double getDmin() {
         return dmin;
     }
 
-    /**
-     * 
-     * @param dmin
-     *     The dmin
-     */
-    public void setDmin(double dmin) {
+    public void setDmin(Double dmin) {
         this.dmin = dmin;
     }
 
-    /**
-     * 
-     * @return
-     *     The rms
-     */
-    public double getRms() {
+    public Double getRms() {
         return rms;
     }
 
-    /**
-     * 
-     * @param rms
-     *     The rms
-     */
-    public void setRms(double rms) {
+    public void setRms(Double rms) {
         this.rms = rms;
     }
 
-    /**
-     * 
-     * @return
-     *     The gap
-     */
-    public long getGap() {
+    public Integer getGap() {
         return gap;
     }
 
-    /**
-     * 
-     * @param gap
-     *     The gap
-     */
-    public void setGap(long gap) {
+    public void setGap(Integer gap) {
         this.gap = gap;
     }
 
-    /**
-     * 
-     * @return
-     *     The magType
-     */
     public String getMagType() {
         return magType;
     }
 
-    /**
-     * 
-     * @param magType
-     *     The magType
-     */
     public void setMagType(String magType) {
         this.magType = magType;
     }
 
-    /**
-     * 
-     * @return
-     *     The type
-     */
     public String getType() {
         return type;
     }
 
-    /**
-     * 
-     * @param type
-     *     The type
-     */
     public void setType(String type) {
         this.type = type;
     }
 
-    /**
-     * 
-     * @return
-     *     The title
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * 
-     * @param title
-     *     The title
-     */
     public void setTitle(String title) {
         this.title = title;
     }

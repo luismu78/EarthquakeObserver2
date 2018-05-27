@@ -36,7 +36,9 @@ public final class UseCaseHandler {
         this.disposables = disposables;
     }
 
-    public <K, V> void execute(UseCase<K, V> useCase, @Nullable K params, DisposableObserver<V> observer) {
+    public <K, V> void execute(UseCase<K, V> useCase,
+                               @Nullable K params,
+                               DisposableObserver<V> observer) {
         setLastUseCase(useCase, params);
         Disposable disposable = useCase.execute(params)
                 .subscribeOn(executionThread.scheduler())

@@ -15,7 +15,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class BaseActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+public abstract class BaseActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Inject
     @Named(BaseActivityModule.ACTIVITY_FRAGMENT_MANAGER)

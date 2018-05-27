@@ -1,16 +1,14 @@
 
 package es.cervecitas.earthquakeobserver.data.net.model;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("org.jsonschema2pojo")
 public class Metadata {
 
     @SerializedName("generated")
     @Expose
-    private long generated;
+    private String generated;
     @SerializedName("url")
     @Expose
     private String url;
@@ -19,161 +17,81 @@ public class Metadata {
     private String title;
     @SerializedName("status")
     @Expose
-    private long status;
+    private Integer status;
     @SerializedName("api")
     @Expose
     private String api;
     @SerializedName("limit")
     @Expose
-    private long limit;
+    private Integer limit;
     @SerializedName("offset")
     @Expose
-    private long offset;
+    private Integer offset;
     @SerializedName("count")
     @Expose
-    private long count;
+    private Integer count;
 
-    /**
-     * 
-     * @return
-     *     The generated
-     */
-    public long getGenerated() {
+    public String getGenerated() {
         return generated;
     }
 
-    /**
-     * 
-     * @param generated
-     *     The generated
-     */
-    public void setGenerated(long generated) {
+    public void setGenerated(String generated) {
         this.generated = generated;
     }
 
-    /**
-     * 
-     * @return
-     *     The url
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * 
-     * @param url
-     *     The url
-     */
     public void setUrl(String url) {
         this.url = url;
     }
 
-    /**
-     * 
-     * @return
-     *     The title
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * 
-     * @param title
-     *     The title
-     */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    /**
-     * 
-     * @return
-     *     The status
-     */
-    public long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    /**
-     * 
-     * @param status
-     *     The status
-     */
-    public void setStatus(long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    /**
-     * 
-     * @return
-     *     The api
-     */
     public String getApi() {
         return api;
     }
 
-    /**
-     * 
-     * @param api
-     *     The api
-     */
     public void setApi(String api) {
         this.api = api;
     }
 
-    /**
-     * 
-     * @return
-     *     The limit
-     */
-    public long getLimit() {
+    public Integer getLimit() {
         return limit;
     }
 
-    /**
-     * 
-     * @param limit
-     *     The limit
-     */
-    public void setLimit(long limit) {
+    public void setLimit(Integer limit) {
         this.limit = limit;
     }
 
-    /**
-     * 
-     * @return
-     *     The offset
-     */
-    public long getOffset() {
+    public Integer getOffset() {
         return offset;
     }
 
-    /**
-     * 
-     * @param offset
-     *     The offset
-     */
-    public void setOffset(long offset) {
+    public void setOffset(Integer offset) {
         this.offset = offset;
     }
 
-    /**
-     * 
-     * @return
-     *     The count
-     */
-    public long getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    /**
-     * 
-     * @param count
-     *     The count
-     */
-    public void setCount(long count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 

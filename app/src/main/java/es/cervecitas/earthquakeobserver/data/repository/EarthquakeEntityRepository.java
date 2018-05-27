@@ -40,16 +40,18 @@ public class EarthquakeEntityRepository implements EarthquakeRepository {
                                                           final long minmag,
                                                           final int limit,
                                                           final String startdate) {
-        return api.getEarthquakeObjects(format, eventtype, orderby, minmag, limit, startdate)
+
+        return api
+                .getEarthquakeObjects(format, eventtype, orderby, minmag, limit, startdate)
                 .map(new Function<EarthquakeObjects, List<EarthquakeEntity>>() {
                     @Override
-                    public List<EarthquakeEntity> apply(EarthquakeObjects earthquakeObjects) throws Exception {
+                    public List<EarthquakeEntity> apply(EarthquakeObjects earthquakeObjects) {
                         return earthquakeObjectToListEarthquakeEntity(earthquakeObjects);
                     }
                 })
                 .map(new Function<List<EarthquakeEntity>, List<Earthquake>>() {
                     @Override
-                    public List<Earthquake> apply(List<EarthquakeEntity> earthquakeEntities) throws Exception {
+                    public List<Earthquake> apply(List<EarthquakeEntity> earthquakeEntities) {
                         List<Earthquake> earthquakeList = new ArrayList<>();
                         for (EarthquakeEntity earthquakeEntity : earthquakeEntities) {
                             earthquakeList.add(entityMapperHolder.getEarthquakeEntityMapper().map(earthquakeEntity));
@@ -61,13 +63,13 @@ public class EarthquakeEntityRepository implements EarthquakeRepository {
 
     private List<EarthquakeEntity> earthquakeObjectToListEarthquakeEntity(EarthquakeObjects earthquakeObjects) {
         List<EarthquakeEntity> earthquakeEntityList = new ArrayList<>();
-        Calendar calDate = Calendar.getInstance();
         EarthquakeEntity.Builder earthquakeEntityBuilder = new EarthquakeEntity.Builder();
 
         for (Feature feature : earthquakeObjects.getFeatures()) {
             earthquakeEntityBuilder.magnitude(feature.getProperties().getMag());
             earthquakeEntityBuilder.location(feature.getProperties().getPlace());
-            calDate.setTimeInMillis(feature.getProperties().getTime());
+            Calendar calDate = Calendar.getInstance();
+            calDate.setTimeInMillis(Long.valueOf(feature.getProperties().getTime()));
             earthquakeEntityBuilder.calendar(calDate);
             earthquakeEntityBuilder.url(feature.getProperties().getUrl());
             earthquakeEntityList.add(earthquakeEntityBuilder.build());

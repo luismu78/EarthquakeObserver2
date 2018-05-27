@@ -9,7 +9,7 @@ import es.cervecitas.earthquakeobserver.domain.EarthquakeQueryParameters;
 import es.cervecitas.earthquakeobserver.domain.repository.EarthquakeRepository;
 import io.reactivex.Observable;
 
-public class GetEarthquakeList implements UseCase<EarthquakeQueryParameters,List<Earthquake>> {
+public class GetEarthquakeList implements UseCase<EarthquakeQueryParameters, List<Earthquake>> {
 
     private final EarthquakeRepository repository;
 
@@ -20,6 +20,7 @@ public class GetEarthquakeList implements UseCase<EarthquakeQueryParameters,List
 
     @Override
     public Observable<List<Earthquake>> execute(EarthquakeQueryParameters params) {
+
         return repository.getEarthquakeList(
                 params.getFormat(),
                 params.getEventType(),

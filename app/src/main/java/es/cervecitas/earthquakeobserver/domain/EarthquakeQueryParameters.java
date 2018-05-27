@@ -1,15 +1,17 @@
 package es.cervecitas.earthquakeobserver.domain;
 
-public class EarthquakeQueryParameters implements DomainObject {
+public final class EarthquakeQueryParameters implements DomainObject {
 
-    private final String format = "geojson";
-    private final String eventType = "earthquake";
+    private final String format;
+    private final String eventType;
     private final Integer limit;
     private final Long minMag;
     private final String orderBy;
     private final String startDate;
 
     private EarthquakeQueryParameters(Builder builder) {
+        this.format = builder.format;
+        this.eventType = builder.eventType;
         this.limit = builder.limit;
         this.minMag = builder.minMag;
         this.orderBy = builder.orderBy;
@@ -52,15 +54,15 @@ public class EarthquakeQueryParameters implements DomainObject {
 
         }
 
-//        public Builder format(String format) {
-//            this.format = format;
-//            return this;
-//        }
+        public Builder format(String format) {
+            this.format = format;
+            return this;
+        }
 
-//        public Builder eventType(String eventType) {
-//            this.eventType = eventType;
-//            return this;
-//        }
+        public Builder eventType(String eventType) {
+            this.eventType = eventType;
+            return this;
+        }
 
         public Builder limit(Integer limit) {
             this.limit = limit;

@@ -5,12 +5,15 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Provides network dependencies.
+ */
 @Module
 public abstract class NetworkModule {
 
     @Provides
     @Singleton
-    static USGSApi usgsApi(DataServiceFactory dataServiceFactory) {
-        return dataServiceFactory.create(USGSApi.class);
+    static USGSApi usgsApi(EarthquakeDataServiceFactory earthquakeDataServiceFactory) {
+        return earthquakeDataServiceFactory.create(USGSApi.class);
     }
 }

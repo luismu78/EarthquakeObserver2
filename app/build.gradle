@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "es.cervecitas.earthquakeobserver"
         minSdkVersion 21
@@ -10,6 +9,9 @@ android {
         versionCode 6
         versionName "1.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+	defaultConfig {
+        buildConfigField("String", "BASE_URL", "\"http://earthquake.usgs.gov/fdsnws/event/1/\"")
     }
     buildTypes {
         release {
@@ -20,10 +22,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Support Libraries
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:preference-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -42,16 +44,16 @@ dependencies {
     //RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    //annotation
-    compileOnly 'javax.annotation:jsr250-api:1.0'
-//    //leakcanary
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
-//    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
+    //okhttp3 logging interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    //leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation 'org.mockito:mockito-core:2.18.3'
-
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }
