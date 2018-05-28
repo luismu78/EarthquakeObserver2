@@ -1,6 +1,6 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist;
 
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,8 +17,16 @@ public class EarthquakeListActivity extends BaseActivity {
         setContentView(R.layout.activity_earthquake_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle(R.string.app_name);
+        getSupportActionBar().setLogo(R.drawable.nav_logo);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+
+
+
+//        getSupportActionBar().setTitle(R.string.app_name);
 
         if (getSupportFragmentManager().findFragmentByTag(EarthquakeListFragment.TAG) == null) {
             getSupportFragmentManager()
