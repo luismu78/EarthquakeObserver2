@@ -1,12 +1,18 @@
 package es.cervecitas.earthquakeobserver.data.net;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import es.cervecitas.earthquakeobserver.BuildConfig;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -17,6 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 final class EarthquakeDataServiceFactory {
 
     private static final String USGS_BASE_URL = BuildConfig.BASE_URL;
+
+    @Inject @Named("CACHE_DIR")
+    File cacheDir;
 
     @Inject
     EarthquakeDataServiceFactory() {
@@ -37,9 +46,15 @@ final class EarthquakeDataServiceFactory {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+        File httpCacheDirectory = new File(cacheDir, "http-cache");
+        int cacheSize = 512 * 1024; // 0.5 MiB
+        Cache cache = new Cache(httpCacheDirectory, cacheSize);
+
         // TODO: remove logging interceptor
 
         return new OkHttpClient.Builder()
+                .addNetworkInterceptor(new CacheInterceptor())
+                .cache(cache)
                 .addInterceptor(loggingInterceptor);
 
 //        return new OkHttpClient.Builder();
