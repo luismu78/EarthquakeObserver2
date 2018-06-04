@@ -1,8 +1,6 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.common.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -45,10 +43,6 @@ public abstract class BaseFragment extends DialogFragment implements HasSupportF
     @Inject
     protected Context activityContext;
 
-//    @Inject
-//    @Named(BaseFragmentModule.CHILD_FRAGMENT_MANAGER)
-//    protected FragmentManager childFragmentManager;
-
     @SuppressWarnings("WeakerAccess")
     @Inject
     DispatchingAndroidInjector<Fragment> childFragmentInjector;
@@ -56,23 +50,9 @@ public abstract class BaseFragment extends DialogFragment implements HasSupportF
     @Nullable
     private Unbinder viewUnbinder;
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onAttach(Activity activity) {
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-        // Perform injection here before M, L (API 22) and below because onAttach(Context)
-        // is not yet available at L.
-        AndroidSupportInjection.inject(this);
-//        }
-        super.onAttach(activity);
-    }
-
     @Override
     public void onAttach(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Perform injection here for M (API 23) due to deprecation of onAttach(Activity).
-            AndroidSupportInjection.inject(this);
-        }
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 

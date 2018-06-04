@@ -21,12 +21,6 @@ public class EarthquakeListActivity extends BaseActivity {
 
         getSupportActionBar().setTitle(R.string.app_name);
         getSupportActionBar().setLogo(R.drawable.nav_logo);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-
-
-
-//        getSupportActionBar().setTitle(R.string.app_name);
 
         if (getSupportFragmentManager().findFragmentByTag(EarthquakeListFragment.TAG) == null) {
             getSupportFragmentManager()

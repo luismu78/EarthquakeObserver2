@@ -1,6 +1,5 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -50,10 +49,7 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
 
         setHasOptionsMenu(true);
 
-//        SharedPreferences sharedPreferences = activityContext.getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        Log.d("HOLA", getClass().getSimpleName() + " - onCreate - " + sharedPreferences.hashCode());
 
         sharedPreferenceChangeListener =
                 new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -71,7 +67,11 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
         super.onViewStateRestored(savedInstanceState);
 
         rvEarthquakes.setAdapter(adapter);
-        rvEarthquakes.setLayoutManager(new LinearLayoutManager(activityContext, LinearLayoutManager.VERTICAL, false));
+        rvEarthquakes.setLayoutManager(
+                new LinearLayoutManager(
+                        activityContext,
+                        LinearLayoutManager.VERTICAL,
+                        false));
 
         presenter.onListEarthquakes();
     }
