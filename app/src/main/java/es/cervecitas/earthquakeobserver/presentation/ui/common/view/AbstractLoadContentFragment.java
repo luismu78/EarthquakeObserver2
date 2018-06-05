@@ -1,5 +1,6 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.common.view;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,6 +27,9 @@ import es.cervecitas.earthquakeobserver.presentation.ui.common.presenter.Present
  */
 public abstract class AbstractLoadContentFragment<T extends Presenter> extends BaseViewFragment<T> implements LoadContentView {
 
+    @BindView(R.id.swipeContainer)
+    protected SwipeRefreshLayout swipeRefreshLayout;
+
     @BindView(R.id.contentPane)
     protected View contentPane;
 
@@ -47,12 +51,14 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
 
     @Override
     public void showLoading() {
-        loadingIndicator.setVisibility(View.VISIBLE);
+//        loadingIndicator.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
-        loadingIndicator.setVisibility(View.INVISIBLE);
+//        loadingIndicator.setVisibility(View.INVISIBLE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
