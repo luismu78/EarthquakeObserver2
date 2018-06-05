@@ -103,7 +103,7 @@ final class EarthquakeListPresenterImpl extends BaseUseCasePresenter<EarthquakeL
 
     @Override
     public void onRetry() {
-
+        Log.d("HOLA", getClass().getSimpleName() + " - onRetry");
     }
 
     @Override

@@ -77,11 +77,6 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.earthquake_activity, menu);
     }

@@ -9,7 +9,7 @@ public class EarthquakeEntity implements Entity {
     private final Double magnitude;
     private final String location;
     private final Calendar calendar;
-    private String url;
+    private final String url;
 
     public EarthquakeEntity(Builder builder) {
         this.magnitude = builder.magnitude;

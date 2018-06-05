@@ -1,7 +1,5 @@
 package es.cervecitas.earthquakeobserver.presentation.model;
 
-import android.util.Log;
-
 import java.util.Calendar;
 
 public class PresentationEarthquake implements PresentationObject {
@@ -9,7 +7,7 @@ public class PresentationEarthquake implements PresentationObject {
     private final Double magnitude;
     private final String location;
     private final Calendar dateTime;
-    private String url;
+    private final String url;
 
     private PresentationEarthquake(Builder builder) {
         this.magnitude = builder.magnitude;

@@ -1,9 +1,7 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 
 import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.presentation.ui.common.BaseActivity;
@@ -29,10 +27,5 @@ public class EarthquakeListActivity extends BaseActivity {
                     .commit();
         }
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
     }
 }

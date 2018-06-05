@@ -7,7 +7,7 @@ public class Earthquake implements DomainObject {
     private final Double magnitude;
     private final String location;
     private final Calendar dateTime;
-    private String url;
+    private final String url;
 
     private Earthquake(Builder builder) {
         this.magnitude = builder.magnitude;
