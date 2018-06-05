@@ -114,12 +114,6 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
     }
 
     @Override
-    public void load() {
-        Log.d("HOLA", getClass().getSimpleName() + " - load - ");
-//        presenter.onListEarthquakes();
-    }
-
-    @Override
     public void showDetails(PresentationEarthquake presentationEarthquake) {
         Log.d("HOLA", getClass().getSimpleName() + " - showDetails - name:" + presentationEarthquake.getLocation());
     }

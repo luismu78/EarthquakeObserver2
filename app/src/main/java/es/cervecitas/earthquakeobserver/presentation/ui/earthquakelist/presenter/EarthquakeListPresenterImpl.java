@@ -1,7 +1,9 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -106,6 +108,8 @@ final class EarthquakeListPresenterImpl extends BaseUseCasePresenter<EarthquakeL
 
     @Override
     public void onEarthquakeClicked(PresentationEarthquake presentationEarthquake) {
-
+        Uri earthquakeUri = Uri.parse(presentationEarthquake.getUrl());
+        Intent showEarthquakeIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+        activityContext.startActivity(showEarthquakeIntent);
     }
 }

@@ -11,7 +11,5 @@ public interface EarthquakeListView extends LoadContentView {
 
     void clear();
 
-    void load();
-
     void showDetails(PresentationEarthquake presentationEarthquake);
 }
