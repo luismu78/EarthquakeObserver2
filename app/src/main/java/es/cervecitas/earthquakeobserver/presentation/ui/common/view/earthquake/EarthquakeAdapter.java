@@ -44,35 +44,43 @@ public final class EarthquakeAdapter {
     }
 
     private void bindLocation(EarthquakeViewHolder holder, PresentationEarthquake presentationEarthquake) {
-        String originalLocation = presentationEarthquake.getLocation();
-        String locationOffset;
-        String primaryLocation;
-        if (originalLocation.contains(LOCATION_SEPARATOR)) {
-            String[] parts = originalLocation.split(LOCATION_SEPARATOR);
-            locationOffset = parts[0] + context.getString(R.string.of_separator);
-            primaryLocation = parts[1];
-        } else {
-            locationOffset = context.getString(R.string.near_the);
-            primaryLocation = originalLocation;
+        if (holder.tvPrimaryLocation != null && holder.tvLocationOffset != null) {
+            String originalLocation = presentationEarthquake.getLocation();
+            String locationOffset;
+            String primaryLocation;
+            if (originalLocation.contains(LOCATION_SEPARATOR)) {
+                String[] parts = originalLocation.split(LOCATION_SEPARATOR);
+                locationOffset = parts[0] + context.getString(R.string.of_separator);
+                primaryLocation = parts[1];
+            } else {
+                locationOffset = context.getString(R.string.near_the);
+                primaryLocation = originalLocation;
+            }
+            holder.tvPrimaryLocation.setText(primaryLocation);
+            holder.tvLocationOffset.setText(locationOffset);
         }
-        holder.tvPrimaryLocation.setText(primaryLocation);
-        holder.tvLocationOffset.setText(locationOffset);
     }
 
     private void bindDate(EarthquakeViewHolder holder, PresentationEarthquake earthquake) {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("LLL dd, yyyy", java.util.Locale.getDefault());
-        holder.tvDate.setText(sdfDate.format(earthquake.getDateTime().getTime()));
+        if (holder.tvDate != null) {
+            SimpleDateFormat sdfDate = new SimpleDateFormat("LLL dd, yyyy", java.util.Locale.getDefault());
+            holder.tvDate.setText(sdfDate.format(earthquake.getDateTime().getTime()));
+        }
     }
 
     private void bindTime(EarthquakeViewHolder holder, PresentationEarthquake earthquake) {
-        SimpleDateFormat sdfTime = new SimpleDateFormat("h:mm a", java.util.Locale.getDefault());
-        holder.tvTime.setText(sdfTime.format(earthquake.getDateTime().getTime()));
+        if (holder.tvTime != null) {
+            SimpleDateFormat sdfTime = new SimpleDateFormat("h:mm a", java.util.Locale.getDefault());
+            holder.tvTime.setText(sdfTime.format(earthquake.getDateTime().getTime()));
+        }
     }
 
     private void setMagnitudeCircle(EarthquakeViewHolder holder, PresentationEarthquake presentationEarthquake) {
-        GradientDrawable magnitudeCircle = (GradientDrawable) holder.tvMagnitude.getBackground();
-        int magnitudeColor = getMagnitudeColor(presentationEarthquake.getMagnitude());
-        magnitudeCircle.setColor(magnitudeColor);
+        if (holder.tvMagnitude != null) {
+            GradientDrawable magnitudeCircle = (GradientDrawable) holder.tvMagnitude.getBackground();
+            int magnitudeColor = getMagnitudeColor(presentationEarthquake.getMagnitude());
+            magnitudeCircle.setColor(magnitudeColor);
+        }
     }
 
     private int getMagnitudeColor(double magnitude) {

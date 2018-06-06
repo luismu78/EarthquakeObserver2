@@ -1,7 +1,5 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.view;
 
-import android.support.v4.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

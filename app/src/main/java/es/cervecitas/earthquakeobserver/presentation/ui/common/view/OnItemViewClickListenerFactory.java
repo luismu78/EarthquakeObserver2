@@ -1,7 +1,5 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.common.view;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import es.cervecitas.earthquakeobserver.inject.PerFragment;

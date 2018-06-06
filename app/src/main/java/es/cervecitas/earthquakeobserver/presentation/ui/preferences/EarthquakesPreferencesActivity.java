@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import java.util.Objects;
+
 import es.cervecitas.earthquakeobserver.R;
 
 public class EarthquakesPreferencesActivity extends AppCompatActivity {
@@ -14,7 +16,7 @@ public class EarthquakesPreferencesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_earthquake_settings);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.action_settings));
     }
 

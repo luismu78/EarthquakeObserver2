@@ -3,6 +3,8 @@ package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import java.util.Objects;
+
 import es.cervecitas.earthquakeobserver.R;
 import es.cervecitas.earthquakeobserver.presentation.ui.common.BaseActivity;
 import es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.view.EarthquakeListFragment;
@@ -17,7 +19,7 @@ public class EarthquakeListActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(R.string.app_name);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
         getSupportActionBar().setLogo(R.drawable.nav_logo);
 
         if (getSupportFragmentManager().findFragmentByTag(EarthquakeListFragment.TAG) == null) {
