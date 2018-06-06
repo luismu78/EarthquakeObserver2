@@ -1,10 +1,13 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.preferences;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
 
 import es.cervecitas.earthquakeobserver.R;
 
@@ -12,7 +15,44 @@ public class EarthquakesPreferenceFragment extends PreferenceFragmentCompat impl
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.settings_earthquake, rootKey);
+        addPreferencesFromResource(R.xml.settings_earthquake);
+
+        Preference minMagnitude = findPreference(getString(R.string.settings_min_magnitude_key));
+        bindPreferenceSummaryToValue(minMagnitude);
+
+        Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
+        bindPreferenceSummaryToValue(orderBy);
+
+        Preference startDate = findPreference(getString(R.string.settings_filter_time_period_key));
+        bindPreferenceSummaryToValue(startDate);
+
+        Preference itemLimit = findPreference(getString(R.string.settings_earthquake_limit_key));
+        bindPreferenceSummaryToValue(itemLimit);
+    }
+
+    private void bindPreferenceSummaryToValue(Preference preference) {
+
+        preference.setOnPreferenceChangeListener(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        String preferenceString;
+        Boolean preferenceBoolean;
+
+        if (preference instanceof CheckBoxPreference) {
+            // Boolean preferences
+            preferenceBoolean = sharedPreferences.getBoolean(preference.getKey(), false);
+            onPreferenceChange(preference, preferenceBoolean);
+        } else {
+            // String preferences
+            preferenceString = sharedPreferences.getString(preference.getKey(), "");
+            onPreferenceChange(preference, preferenceString);
+
+            if (preference instanceof EditTextPreference) {
+                EditTextPreference p = (EditTextPreference) preference;
+                preference.setSummary(p.getText());
+            }
+
+        }
     }
 
     @Override

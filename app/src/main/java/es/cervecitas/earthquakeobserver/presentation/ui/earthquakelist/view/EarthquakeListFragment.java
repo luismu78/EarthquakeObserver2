@@ -50,6 +50,7 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
 
         setHasOptionsMenu(true);
 
+        //TODO: inject this
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         sharedPreferenceChangeListener =
@@ -67,12 +68,11 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
 
+        adapter.onRestoreInstanceState(savedInstanceState);
+
         rvEarthquakes.setAdapter(adapter);
         rvEarthquakes.setLayoutManager(
-                new LinearLayoutManager(
-                        activityContext,
-                        LinearLayoutManager.VERTICAL,
-                        false));
+                new LinearLayoutManager(activityContext, LinearLayoutManager.VERTICAL,false));
 
         presenter.onListEarthquakes();
 
@@ -83,6 +83,12 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
                 presenter.onListEarthquakes();
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        adapter.onSavedInstanceState(outState);
     }
 
     @Override

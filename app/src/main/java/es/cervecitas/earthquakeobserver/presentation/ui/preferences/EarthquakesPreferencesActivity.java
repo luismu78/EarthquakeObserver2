@@ -16,7 +16,7 @@ public class EarthquakesPreferencesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_earthquake_settings);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(this.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.action_settings));
     }
 

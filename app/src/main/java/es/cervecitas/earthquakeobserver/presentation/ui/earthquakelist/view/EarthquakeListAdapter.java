@@ -1,11 +1,14 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.view;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,6 +21,8 @@ import es.cervecitas.earthquakeobserver.presentation.ui.common.view.earthquake.E
 
 @PerFragment
 final class EarthquakeListAdapter extends RecyclerView.Adapter<EarthquakeLineViewHolder> {
+
+    public static final String STATE_PRESENTATION_EARTHQUAKES = "EarthquakeListAdapter.presentationEarthquakes";
 
     private final List<PresentationEarthquake> presentationEarthquakeList;
     private final EarthquakeAdapter earthquakeAdapter;
@@ -72,5 +77,18 @@ final class EarthquakeListAdapter extends RecyclerView.Adapter<EarthquakeLineVie
         notifyDataSetChanged();
     }
 
+    void onSavedInstanceState(Bundle outstate) {
+        // TODO: These models should not be saved / restored in the Bundle. The repository
+        // provided by the data layer should be used to provide these synchronously from cache
+        // when available.
+        outstate.putSerializable(STATE_PRESENTATION_EARTHQUAKES, (Serializable)presentationEarthquakeList);
+    }
+
+    void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            Serializable presentationEarthquakes = savedInstanceState.getSerializable(STATE_PRESENTATION_EARTHQUAKES);
+            this.presentationEarthquakeList.addAll((List<PresentationEarthquake>)presentationEarthquakes);
+        }
+    }
 
 }
