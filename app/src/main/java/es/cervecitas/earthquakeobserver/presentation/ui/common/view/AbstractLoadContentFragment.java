@@ -41,34 +41,46 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
 
     @Override
     public void showContent() {
-        contentPane.setVisibility(View.VISIBLE);
+        if (contentPane != null && contentPane.getVisibility() != View.VISIBLE) {
+            contentPane.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void hideContent() {
-        contentPane.setVisibility(View.INVISIBLE);
+        if (contentPane != null && contentPane.getVisibility() != View.INVISIBLE) {
+            contentPane.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
     public void showLoading() {
 //        loadingIndicator.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
 //        loadingIndicator.setVisibility(View.INVISIBLE);
-        swipeRefreshLayout.setRefreshing(false);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
     public void showRetry() {
-        retryButton.setVisibility(View.VISIBLE);
+        if (retryButton != null && retryButton.getVisibility() != View.VISIBLE) {
+            retryButton.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void hideRetry() {
-        retryButton.setVisibility(View.INVISIBLE);
+        if (retryButton != null && retryButton.getVisibility() != View.INVISIBLE) {
+            retryButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

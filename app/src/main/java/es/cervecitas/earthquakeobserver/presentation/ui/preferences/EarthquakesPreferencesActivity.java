@@ -14,10 +14,10 @@ public class EarthquakesPreferencesActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_earthquake_settings);
+        this.setContentView(R.layout.activity_earthquake_settings);
 
         Objects.requireNonNull(this.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.action_settings));
+        this.getSupportActionBar().setTitle(getString(R.string.action_settings));
     }
 
     @Override
