@@ -16,7 +16,6 @@ import es.cervecitas.earthquakeobserver.data.cache.OnlineInterceptor;
 import es.cervecitas.earthquakeobserver.data.cache.Reachability;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -47,8 +46,8 @@ final class EarthquakeDataServiceFactory {
 
     private OkHttpClient.Builder okHttpClientBuilder() {
 
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         File httpCacheDirectory = new File(cacheDir, "http-cache");
         int cacheSize = 512 * 1024; // 0.5 MiB
@@ -59,8 +58,8 @@ final class EarthquakeDataServiceFactory {
         return new OkHttpClient.Builder()
                 .addNetworkInterceptor(new OnlineInterceptor(reachability))
                 .addNetworkInterceptor(new OfflineInterceptor(reachability))
-                .cache(cache)
-                .addInterceptor(loggingInterceptor);
+                .cache(cache);
+//                .addInterceptor(loggingInterceptor);
     }
 
     private Retrofit retrofit(OkHttpClient.Builder okHttpClientBuilder) {
