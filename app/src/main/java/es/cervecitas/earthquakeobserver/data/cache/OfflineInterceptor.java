@@ -1,5 +1,7 @@
 package es.cervecitas.earthquakeobserver.data.cache;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -15,7 +17,7 @@ public class OfflineInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
         if(!mReachability.isConnected()){
             request = request.newBuilder()

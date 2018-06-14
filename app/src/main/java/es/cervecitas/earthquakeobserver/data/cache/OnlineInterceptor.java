@@ -1,6 +1,6 @@
 package es.cervecitas.earthquakeobserver.data.cache;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
@@ -16,19 +16,19 @@ public class OnlineInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
 
         String headers = response.header("Cache-Control");
-        if(mReachability.isConnected() &&
-                (headers == null || headers.contains("no-store") || headers.contains("must-revalidate") || headers.contains("no-cache") || headers.contains("max-age=0"))){
-
-            Log.d("HOLA", getClass().getSimpleName() + " - Returning fresh response");
-            return response.newBuilder()
-                    .header("Cache-Control", "public, max-age=600")
+        if (mReachability.isConnected() &&
+                (headers == null || headers.contains("no-store")
+                        || headers.contains("must-revalidate") || headers.contains("no-cache")
+                        || headers.contains("max-age=0"))) {
+            return response
+                    .newBuilder()
+                    .header("Cache-Control", "public, max-age=300")
                     .build();
-        } else{
-            Log.d("HOLA", getClass().getSimpleName() + " - Returning old response");
+        } else {
             return response;
         }
     }

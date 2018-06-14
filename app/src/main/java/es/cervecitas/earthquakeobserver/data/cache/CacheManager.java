@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 
 import es.cervecitas.earthquakeobserver.BuildConfig;
 
-//https://stackoverflow.com/questions/12746269/how-to-implement-caching-in-android-app-for-rest-api-results
+//TODO: https://stackoverflow.com/questions/12746269/how-to-implement-caching-in-android-app-for-rest-api-results
 public class CacheManager {
 
     Cache<String, String> earthquakeListCache;
