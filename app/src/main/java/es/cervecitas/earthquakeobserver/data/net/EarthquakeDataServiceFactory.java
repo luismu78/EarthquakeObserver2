@@ -4,14 +4,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import es.cervecitas.earthquakeobserver.App;
 import es.cervecitas.earthquakeobserver.BuildConfig;
+import es.cervecitas.earthquakeobserver.data.cache.CacheInterceptor;
+import es.cervecitas.earthquakeobserver.data.cache.CacheManager;
+import es.cervecitas.earthquakeobserver.data.cache.OfflineInterceptor;
+import es.cervecitas.earthquakeobserver.data.cache.OnlineInterceptor;
+import es.cervecitas.earthquakeobserver.data.cache.Reachability;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,15 +28,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
 final class EarthquakeDataServiceFactory {
 
     private static final String USGS_BASE_URL = BuildConfig.BASE_URL;
+    private CacheManager cacheManager;
+    private Reachability reachability;
 
     @Inject
     @Named("CACHE_DIR")
     File cacheDir;
 
     @Inject
-    EarthquakeDataServiceFactory() {
+    EarthquakeDataServiceFactory(App app) {
         // TODO: provide the data here instead of using constants
+        this.reachability = new Reachability(app.getApplicationContext());
+
+        try {
+            this.cacheManager = new CacheManager(app.getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+//    @Inject
+//    EarthquakeDataServiceFactory() {
+//        // TODO: provide the data here instead of using constants
+//    }
 
     private Gson provideGson() {
         GsonBuilder builder = new GsonBuilder();
@@ -41,8 +63,8 @@ final class EarthquakeDataServiceFactory {
 
     private OkHttpClient.Builder okHttpClientBuilder() {
 
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         File httpCacheDirectory = new File(cacheDir, "http-cache");
         int cacheSize = 512 * 1024; // 0.5 MiB
@@ -51,9 +73,12 @@ final class EarthquakeDataServiceFactory {
         // TODO: remove logging interceptor
 
         return new OkHttpClient.Builder()
-                .addNetworkInterceptor(new CacheInterceptor())
-                .cache(cache);
-//                .addInterceptor(loggingInterceptor);
+                .addNetworkInterceptor(new OnlineInterceptor(reachability))
+                .addNetworkInterceptor(new OfflineInterceptor(reachability))
+//                .addNetworkInterceptor(new CacheInterceptor(cacheManager, reachability))
+//                .addNetworkInterceptor(new CacheInterceptorOld())
+                .cache(cache)
+                .addInterceptor(loggingInterceptor);
     }
 
     private Retrofit retrofit(OkHttpClient.Builder okHttpClientBuilder) {
