@@ -84,10 +84,14 @@ final class EarthquakeListAdapter extends RecyclerView.Adapter<EarthquakeLineVie
         outstate.putSerializable(STATE_PRESENTATION_EARTHQUAKES, (Serializable)presentationEarthquakeList);
     }
 
+    @SuppressWarnings("unchecked")
     void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             Serializable presentationEarthquakes = savedInstanceState.getSerializable(STATE_PRESENTATION_EARTHQUAKES);
-            this.presentationEarthquakeList.addAll((List<PresentationEarthquake>)presentationEarthquakes);
+            if (presentationEarthquakes != null) {
+                this.presentationEarthquakeList.addAll((List<PresentationEarthquake>)presentationEarthquakes);
+            }
+
         }
     }
 
