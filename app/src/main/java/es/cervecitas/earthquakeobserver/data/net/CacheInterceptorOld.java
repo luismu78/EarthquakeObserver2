@@ -9,7 +9,7 @@ import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-public class CacheInterceptor implements Interceptor {
+public class CacheInterceptorOld implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
