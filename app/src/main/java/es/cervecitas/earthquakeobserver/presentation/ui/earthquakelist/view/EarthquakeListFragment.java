@@ -36,7 +36,7 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
     @BindView(R.id.contentPane)
     RecyclerView rvEarthquakes;
 
-    SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
     @Nullable
     @Override

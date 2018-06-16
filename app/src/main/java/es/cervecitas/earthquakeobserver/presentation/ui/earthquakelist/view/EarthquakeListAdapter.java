@@ -22,7 +22,7 @@ import es.cervecitas.earthquakeobserver.presentation.ui.common.view.earthquake.E
 @PerFragment
 final class EarthquakeListAdapter extends RecyclerView.Adapter<EarthquakeLineViewHolder> {
 
-    public static final String STATE_PRESENTATION_EARTHQUAKES = "EarthquakeListAdapter.presentationEarthquakes";
+    private static final String STATE_PRESENTATION_EARTHQUAKES = "EarthquakeListAdapter.presentationEarthquakes";
 
     private final List<PresentationEarthquake> presentationEarthquakeList;
     private final EarthquakeAdapter earthquakeAdapter;

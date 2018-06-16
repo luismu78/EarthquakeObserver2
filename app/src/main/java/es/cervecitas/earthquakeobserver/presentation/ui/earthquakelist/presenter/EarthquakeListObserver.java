@@ -12,7 +12,7 @@ final class EarthquakeListObserver extends AbstractLoadContentViewObserver<Earth
 
     private final ModelMapperHolder modelMapperHolder;
 
-    protected EarthquakeListObserver(EarthquakeListView view, ModelMapperHolder modelMapperHolder) {
+    EarthquakeListObserver(EarthquakeListView view, ModelMapperHolder modelMapperHolder) {
         super(view);
         this.modelMapperHolder = modelMapperHolder;
     }

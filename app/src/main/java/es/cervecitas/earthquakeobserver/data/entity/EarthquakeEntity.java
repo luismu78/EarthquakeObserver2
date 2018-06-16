@@ -11,7 +11,7 @@ public class EarthquakeEntity implements Entity {
     private final Calendar calendar;
     private final String url;
 
-    public EarthquakeEntity(Builder builder) {
+    private EarthquakeEntity(Builder builder) {
         this.magnitude = builder.magnitude;
         this.location = builder.location;
         this.calendar = builder.calendar;
