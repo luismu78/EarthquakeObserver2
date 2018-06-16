@@ -16,13 +16,10 @@
     <string name="settings_category_magnitude">Magnitud</string>
 
     <!-- Strings For Enable Date Filter Preference [CHAR LIMIT=30] -->
-    <string name="settings_enable_date_filter_label">Activar Fitros por Fecha</string>
 
     <!-- Strings For Date Preference [CHAR LIMIT=30] -->
-    <string name="settings_from_date_label">Desde la Fecha</string>
 
     <!-- Strings For Date Preference [CHAR LIMIT=30] -->
-    <string name="settings_to_date_label">Hasta la Fecha</string>
 
     <!-- Strings For Item Limit Preference [CHAR LIMIT=20] -->
     <string name="settings_earthquake_limit_label">Terremotos a Mostrar</string>
@@ -62,12 +59,7 @@
 
     <!-- Settings toolbar -->
     <string name="action_settings">Configuración</string>
-    <string name="no_internet_connection">No hay conexión a internet</string>
-    <string name="no_earthquakes">No hay terremotos</string>
 
     <!-- Error Messages -->
-    <string name="error_no_data_found">No hay resultados</string>
-    <string name="error_no_connection_to_server">No se puede conectar al servidor</string>
-    <string name="error_try_later">Intentelo más tarde</string>
     <string name="click_to_retry">Click to retry</string>
 </resources>
