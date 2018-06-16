@@ -38,14 +38,10 @@ import dagger.android.support.HasSupportFragmentInjector;
  * <b>VIEW BINDING</b>
  * This fragment handles view bind and unbinding.
  */
-public abstract class BaseFragment extends DialogFragment implements HasSupportFragmentInjector {
+public abstract class BaseFragment extends DialogFragment  {
 
     @Inject
     protected Context activityContext;
-
-    @SuppressWarnings("WeakerAccess")
-    @Inject
-    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     @Nullable
     private Unbinder viewUnbinder;
@@ -101,10 +97,5 @@ public abstract class BaseFragment extends DialogFragment implements HasSupportF
         }
 
         super.onDestroyView();
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return childFragmentInjector;
     }
 }

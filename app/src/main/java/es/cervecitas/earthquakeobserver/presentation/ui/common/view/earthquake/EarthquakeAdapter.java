@@ -20,11 +20,13 @@ public final class EarthquakeAdapter {
 
     private final Context context;
 
+    @SuppressWarnings("unused")
     @Inject
     EarthquakeAdapter(Context context) {
         this.context = context;
     }
 
+    @SuppressWarnings("unused")
     public void initializeViewHolder(EarthquakeViewHolder holder) {
     }
 
