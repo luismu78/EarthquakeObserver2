@@ -1,6 +1,7 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.common.view;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,12 +31,14 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
     @BindView(R.id.swipeContainer)
     protected SwipeRefreshLayout swipeRefreshLayout;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.contentPane)
     protected View contentPane;
 
     @BindView(R.id.loadingIndicator)
     protected View loadingIndicator;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.retryButton)
     protected View retryButton;
 
@@ -90,5 +93,6 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
 
     @OnClick(R.id.retryButton)
     protected void onRetryButtonClicked() {
+        Log.d("HOLA", getClass().getSimpleName() + " - onRetryButtonClicked()");
     }
 }

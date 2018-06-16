@@ -24,8 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 final class EarthquakeDataServiceFactory {
 
     private static final String USGS_BASE_URL = BuildConfig.BASE_URL;
-    private Reachability reachability;
+    private final Reachability reachability;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     @Named("CACHE_DIR")
     File cacheDir;
