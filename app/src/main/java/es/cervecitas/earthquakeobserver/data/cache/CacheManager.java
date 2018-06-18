@@ -16,7 +16,7 @@ import es.cervecitas.earthquakeobserver.BuildConfig;
 //TODO: https://stackoverflow.com/questions/12746269/how-to-implement-caching-in-android-app-for-rest-api-results
 public class CacheManager {
 
-    Cache<String, String> earthquakeListCache;
+    private Cache<String, String> earthquakeListCache;
     private DiskLruCache diskLruCache;
     private final Context context;
 
@@ -41,7 +41,7 @@ public class CacheManager {
         return earthquakeListCache;
     }
 
-    public static String getMd5Hash(String input) {
+    private static String getMd5Hash(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());

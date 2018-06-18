@@ -12,6 +12,7 @@ public final class OnItemViewClickListenerFactory<T> {
 
     private final OnItemClickListener<T> onItemClickListener;
 
+    @SuppressWarnings("unused")
     @Inject
     OnItemViewClickListenerFactory(OnItemClickListener<T> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;

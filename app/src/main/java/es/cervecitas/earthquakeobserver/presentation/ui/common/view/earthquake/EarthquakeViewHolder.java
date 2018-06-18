@@ -34,6 +34,7 @@ public final class EarthquakeViewHolder {
     @BindView(R.id.tvTime)
     public TextView tvTime;
 
+    @SuppressWarnings("unused")
     EarthquakeViewHolder(View itemView) {
         ButterKnife.bind(this, itemView);
     }

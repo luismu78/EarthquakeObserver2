@@ -1,14 +1,14 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.preferences;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import java.util.Objects;
 
 import es.cervecitas.earthquakeobserver.R;
+import es.cervecitas.earthquakeobserver.presentation.ui.common.BaseActivity;
 
-public class EarthquakesPreferencesActivity extends AppCompatActivity {
+public class EarthquakesPreferencesActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

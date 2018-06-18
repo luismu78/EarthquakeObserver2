@@ -11,6 +11,7 @@ public class OnlineInterceptor implements Interceptor {
 
     private final Reachability mReachability;
 
+    @SuppressWarnings("unused")
     public OnlineInterceptor(Reachability reachability) {
         mReachability = reachability;
     }

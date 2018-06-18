@@ -25,6 +25,7 @@ public class EarthquakeEntityRepository implements EarthquakeRepository {
         this.entityMapperHolder = entityMapperHolder;
     }
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     USGSApi api;
 

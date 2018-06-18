@@ -12,6 +12,7 @@ public class OfflineInterceptor implements Interceptor {
 
     private final Reachability mReachability;
 
+    @SuppressWarnings("unused")
     public OfflineInterceptor(Reachability reachability) {
         mReachability = reachability;
     }

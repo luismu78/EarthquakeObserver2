@@ -23,6 +23,7 @@ import es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.view.Eart
 @PerFragment
 final class EarthquakeListPresenterImpl extends BaseUseCasePresenter<EarthquakeListView> implements EarthquakeListPresenter {
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     Context activityContext;
 
@@ -58,10 +59,13 @@ final class EarthquakeListPresenterImpl extends BaseUseCasePresenter<EarthquakeL
         useCaseHandler.execute(getEarthquakeList, parameters, observerFactory.create());
     }
 
+    @SuppressWarnings("SameReturnValue")
     private String getFormat() {
         return "geojson"; //TODO: fix magic string
     }
 
+
+    @SuppressWarnings("SameReturnValue")
     private String getEventType() {
         return "earthquake"; //TODO: fix magic string
     }

@@ -16,7 +16,7 @@ import es.cervecitas.earthquakeobserver.inject.PerFragment;
 @Module
 public abstract class BaseFragmentModule {
 
-    static final String CHILD_FRAGMENT_MANAGER = "BaseFragmentModule.childFragmentManager";
+    private static final String CHILD_FRAGMENT_MANAGER = "BaseFragmentModule.childFragmentManager";
 
     @Provides
     @Named(CHILD_FRAGMENT_MANAGER)

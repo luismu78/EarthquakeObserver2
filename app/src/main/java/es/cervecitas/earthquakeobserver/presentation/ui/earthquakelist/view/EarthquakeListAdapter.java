@@ -22,7 +22,7 @@ import es.cervecitas.earthquakeobserver.presentation.ui.common.view.earthquake.E
 @PerFragment
 final class EarthquakeListAdapter extends RecyclerView.Adapter<EarthquakeLineViewHolder> {
 
-    public static final String STATE_PRESENTATION_EARTHQUAKES = "EarthquakeListAdapter.presentationEarthquakes";
+    private static final String STATE_PRESENTATION_EARTHQUAKES = "EarthquakeListAdapter.presentationEarthquakes";
 
     private final List<PresentationEarthquake> presentationEarthquakeList;
     private final EarthquakeAdapter earthquakeAdapter;
@@ -84,10 +84,14 @@ final class EarthquakeListAdapter extends RecyclerView.Adapter<EarthquakeLineVie
         outstate.putSerializable(STATE_PRESENTATION_EARTHQUAKES, (Serializable)presentationEarthquakeList);
     }
 
+    @SuppressWarnings("unchecked")
     void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             Serializable presentationEarthquakes = savedInstanceState.getSerializable(STATE_PRESENTATION_EARTHQUAKES);
-            this.presentationEarthquakeList.addAll((List<PresentationEarthquake>)presentationEarthquakes);
+            if (presentationEarthquakes != null) {
+                this.presentationEarthquakeList.addAll((List<PresentationEarthquake>)presentationEarthquakes);
+            }
+
         }
     }
 

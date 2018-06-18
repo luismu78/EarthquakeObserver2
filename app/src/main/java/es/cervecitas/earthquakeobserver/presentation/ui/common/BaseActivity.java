@@ -17,12 +17,14 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public abstract class BaseActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     @Named(BaseActivityModule.ACTIVITY_FRAGMENT_MANAGER)
     protected FragmentManager fragmentManager;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
-    DispatchingAndroidInjector<Fragment> fragmentInjector;
+    protected DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

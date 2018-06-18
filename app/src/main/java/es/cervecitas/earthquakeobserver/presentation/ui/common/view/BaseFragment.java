@@ -4,16 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Abstract (Dialog)Fragment for all (Dialog)Fragments and child (Dialog)Fragments to extend.
@@ -38,14 +34,10 @@ import dagger.android.support.HasSupportFragmentInjector;
  * <b>VIEW BINDING</b>
  * This fragment handles view bind and unbinding.
  */
-public abstract class BaseFragment extends DialogFragment implements HasSupportFragmentInjector {
+public abstract class BaseFragment extends DialogFragment {
 
     @Inject
     protected Context activityContext;
-
-    @SuppressWarnings("WeakerAccess")
-    @Inject
-    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     @Nullable
     private Unbinder viewUnbinder;
@@ -101,10 +93,5 @@ public abstract class BaseFragment extends DialogFragment implements HasSupportF
         }
 
         super.onDestroyView();
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return childFragmentInjector;
     }
 }

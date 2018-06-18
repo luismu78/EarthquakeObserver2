@@ -1,8 +1,5 @@
 package es.cervecitas.earthquakeobserver.data;
 
-import es.cervecitas.earthquakeobserver.data.net.model.EarthquakeObjects;
-import io.reactivex.Observable;
-
 public class DataResponses {
 
     // https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10

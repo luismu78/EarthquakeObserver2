@@ -30,13 +30,14 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
 
     public static final String TAG = "earthquakelist.view.EarthquakeListFragment";
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     EarthquakeListAdapter adapter;
 
     @BindView(R.id.contentPane)
     RecyclerView rvEarthquakes;
 
-    SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
     @Nullable
     @Override
