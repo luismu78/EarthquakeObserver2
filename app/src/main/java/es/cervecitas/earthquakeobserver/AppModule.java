@@ -17,6 +17,8 @@ import es.cervecitas.earthquakeobserver.inject.PerActivity;
 import es.cervecitas.earthquakeobserver.presentation.PresentationModule;
 import es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.EarthquakeListActivity;
 import es.cervecitas.earthquakeobserver.presentation.ui.earthquakelist.EarthquakeListActivityModule;
+import es.cervecitas.earthquakeobserver.presentation.ui.preferences.EarthquakesPreferenceActivityModule;
+import es.cervecitas.earthquakeobserver.presentation.ui.preferences.EarthquakesPreferencesActivity;
 
 @Module(includes = {
         AndroidSupportInjectionModule.class,
@@ -38,4 +40,8 @@ abstract class AppModule {
     @PerActivity
     @ContributesAndroidInjector(modules = EarthquakeListActivityModule.class)
     abstract EarthquakeListActivity earthquakeListActivityInjector();
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = EarthquakesPreferenceActivityModule.class)
+    abstract EarthquakesPreferencesActivity earthquakesPreferencesActivityInjector();
 }

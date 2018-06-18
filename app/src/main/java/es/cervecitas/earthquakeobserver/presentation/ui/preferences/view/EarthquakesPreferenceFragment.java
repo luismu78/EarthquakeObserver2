@@ -1,5 +1,6 @@
-package es.cervecitas.earthquakeobserver.presentation.ui.preferences;
+package es.cervecitas.earthquakeobserver.presentation.ui.preferences.view;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
@@ -12,6 +13,15 @@ import android.support.v7.preference.PreferenceManager;
 import es.cervecitas.earthquakeobserver.R;
 
 public class EarthquakesPreferenceFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
+
+    private Context context = null;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        this.context = context;
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -33,7 +43,7 @@ public class EarthquakesPreferenceFragment extends PreferenceFragmentCompat impl
     private void bindPreferenceSummaryToValue(Preference preference) {
 
         preference.setOnPreferenceChangeListener(this);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         String preferenceString;
         Boolean preferenceBoolean;
