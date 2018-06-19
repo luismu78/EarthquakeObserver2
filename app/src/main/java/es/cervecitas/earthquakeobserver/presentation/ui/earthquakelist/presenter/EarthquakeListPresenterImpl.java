@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.util.Calendar;
 
@@ -32,6 +31,7 @@ final class EarthquakeListPresenterImpl extends BaseUseCasePresenter<EarthquakeL
 
     private SharedPreferences sharedPreferences;
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     protected EarthquakeListPresenterImpl(EarthquakeListView view,
                                           UseCaseHandler useCaseHandler,
@@ -107,7 +107,8 @@ final class EarthquakeListPresenterImpl extends BaseUseCasePresenter<EarthquakeL
 
     @Override
     public void onRetry() {
-        Log.d("HOLA", getClass().getSimpleName() + " - onRetry");
+        clearUseCases();
+        useCaseHandler.executePreviousUseCase(observerFactory.create());
     }
 
     @Override
