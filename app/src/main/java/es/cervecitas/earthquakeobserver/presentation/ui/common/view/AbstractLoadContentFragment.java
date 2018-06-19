@@ -1,7 +1,6 @@
 package es.cervecitas.earthquakeobserver.presentation.ui.common.view;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -88,6 +87,5 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
 
     @OnClick(R.id.retryButton)
     protected void onRetryButtonClicked() {
-        Log.d("HOLA", getClass().getSimpleName() + " - onRetryButtonClicked()");
     }
 }

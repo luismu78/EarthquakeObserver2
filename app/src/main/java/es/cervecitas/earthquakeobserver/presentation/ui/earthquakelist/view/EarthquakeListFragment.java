@@ -73,7 +73,7 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
 
         rvEarthquakes.setAdapter(adapter);
         rvEarthquakes.setLayoutManager(
-                new LinearLayoutManager(activityContext, LinearLayoutManager.VERTICAL,false));
+                new LinearLayoutManager(activityContext, LinearLayoutManager.VERTICAL, false));
 
         presenter.onListEarthquakes();
 
@@ -127,5 +127,10 @@ public class EarthquakeListFragment extends AbstractLoadContentFragment<Earthqua
     @Override
     public void showDetails(PresentationEarthquake presentationEarthquake) {
         Log.d("HOLA", getClass().getSimpleName() + " - showDetails - name:" + presentationEarthquake.getLocation());
+    }
+
+    @Override
+    protected void onRetryButtonClicked() {
+        presenter.onRetry();
     }
 }
