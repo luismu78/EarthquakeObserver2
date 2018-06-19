@@ -35,9 +35,6 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
     @BindView(R.id.contentPane)
     protected View contentPane;
 
-    @BindView(R.id.loadingIndicator)
-    protected View loadingIndicator;
-
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.retryButton)
     protected View retryButton;
@@ -58,7 +55,6 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
 
     @Override
     public void showLoading() {
-//        loadingIndicator.setVisibility(View.VISIBLE);
         if (swipeRefreshLayout != null) {
             swipeRefreshLayout.setRefreshing(true);
         }
@@ -66,7 +62,6 @@ public abstract class AbstractLoadContentFragment<T extends Presenter> extends B
 
     @Override
     public void hideLoading() {
-//        loadingIndicator.setVisibility(View.INVISIBLE);
         if (swipeRefreshLayout != null) {
             swipeRefreshLayout.setRefreshing(false);
         }
